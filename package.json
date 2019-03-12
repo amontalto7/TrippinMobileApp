@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "node ./node_modules/jest/bin/jest.js --watchAll"
+    "test": "node ./node_modules/jest/bin/jest.js",
+    "test:dev": "node ./node_modules/jest/bin/jest.js --watchAll"
   },
   "jest": {
     "preset": "jest-expo"
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
+    "jest": "^24.4.0",
     "jest-expo": "^32.0.0"
   },
   "private": true
