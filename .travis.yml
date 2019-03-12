@@ -6,8 +6,3 @@ branches:
 cache:
   directories:
     - node_modules
-services:
-  - mongodb
-before_script:
-  - sleep 10
-  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
