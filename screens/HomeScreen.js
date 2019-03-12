@@ -41,8 +41,9 @@ export default class HomeScreen extends React.Component {
               <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
             </View>
             <Text>Hello world! This is the TRIPPIN App!</Text>
+            <Text>Lets go!</Text>
             <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
+              Change this text and your app will automatically reload. YAY!
             </Text>
           </View>
 
