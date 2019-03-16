@@ -17,12 +17,16 @@
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-elements": "^1.1.0",
-    "react-navigation": "^3.0.9"
+    "react-navigation": "^3.0.9",
+    "request": "^2.88.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
+    "babel-preset-react-native": "^4.0.1",
     "jest": "^24.4.0",
-    "jest-expo": "^32.0.0"
+    "jest-expo": "^32.0.0",
+    "react-native-dotenv": "^0.2.0"
   },
   "private": true
 }
