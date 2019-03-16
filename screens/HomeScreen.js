@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
+import { Button, ThemeProvider } from 'react-native-elements';
 
 import { MonoText } from '../components/StyledText';
 
@@ -49,8 +50,12 @@ export default class HomeScreen extends React.Component {
 
           <View style={styles.helpContainer}>
             <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+              <Text style={styles.helpLinkText}>Help,  it didn’t automatically reload!</Text>
             </TouchableOpacity>
+            <ThemeProvider>
+      <Button title="Hey!" />
+     </ThemeProvider>
+
           </View>
         </ScrollView>
 
