@@ -6,6 +6,9 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import PhrasesScreen from '../screens/PhrasesScreen';
+import SignInScreen from '../screens/SignInScreen';
+
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -39,6 +42,35 @@ LinksStack.navigationOptions = {
   ),
 };
 
+const PhrasesStack = createStackNavigator({
+  Phrases: PhrasesScreen,
+});
+
+PhrasesStack.navigationOptions = {
+  tabBarLabel: 'Phrases',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+    />
+  ),
+};
+
+const SignInStack = createStackNavigator({
+  SignIn: SignInScreen,
+});
+
+SignInStack.navigationOptions = {
+  tabBarLabel: 'Sign-in',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+    />
+  ),
+};
+
+
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
 });
@@ -55,6 +87,9 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
+  PhrasesStack,
   LinksStack,
   SettingsStack,
+  SignInStack,
+  
 });
