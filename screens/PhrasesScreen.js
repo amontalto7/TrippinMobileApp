@@ -47,17 +47,17 @@ function translate(language, phrases) {
   }
 }
 
-export default class LinksScreen extends React.Component {
+export default class PhrasesScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
   };
 
   render() {
     return (
-      <View> (
+      <View> 
         <Text>PHRASES</Text>
 
-      )
+      
       </View>
     );
   }
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
 });
 
-translate("es", phrases);
+// translate("es", phrases);
 
 
 
