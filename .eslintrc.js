@@ -14,6 +14,9 @@ module.exports = {
         "trailingComma": "all",
       }
     ],
+    "react/prefer-stateless-function": "off",
+    "react/jsx-filename-extension": "off",
+    "no-use-before-define": "off",
     "react/jsx-closing-bracket-location": "off",
     "react/jsx-closing-tag-location": "off",
     "react/jsx-curly-spacing": "off",
