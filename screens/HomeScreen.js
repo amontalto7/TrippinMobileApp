@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
-import { Button, ThemeProvider } from 'react-native-elements';
 
 import { MonoText } from '../components/StyledText';
 
@@ -41,21 +40,16 @@ export default class HomeScreen extends React.Component {
             <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
               <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
             </View>
-            <Text>Hello world! This is the TRIPPIN App!</Text>
-            <Text>Lets go!</Text>
+
             <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload. YAY!
+              Change this text and your app will automatically reload.
             </Text>
           </View>
 
           <View style={styles.helpContainer}>
             <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help,  it didn’t automatically reload!</Text>
+              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
             </TouchableOpacity>
-            <ThemeProvider>
-      <Button title="Hey!" />
-     </ThemeProvider>
-
           </View>
         </ScrollView>
 
