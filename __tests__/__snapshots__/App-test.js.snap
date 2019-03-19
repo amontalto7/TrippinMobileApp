@@ -269,7 +269,7 @@ exports[`App snapshot renders the root without loading screen 1`] = `
       }
     >
       <View
-        accessibilityLabel="Home, tab, 1 of 3"
+        accessibilityLabel="Home, tab, 1 of 4"
         accessible={true}
         hitSlop={
           Object {
@@ -365,7 +365,103 @@ exports[`App snapshot renders the root without loading screen 1`] = `
         </Text>
       </View>
       <View
-        accessibilityLabel="Links, tab, 2 of 3"
+        accessibilityLabel="Phrases, tab, 2 of 4"
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 5,
+            "left": 15,
+            "right": 15,
+            "top": 5,
+          }
+        }
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "flex": 1,
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
+              "flexDirection": "column",
+              "justifyContent": "flex-end",
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "height": 29,
+              },
+              false,
+              Object {
+                "flex": 1,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "alignSelf": "center",
+                "height": "100%",
+                "justifyContent": "center",
+                "minWidth": 25,
+                "opacity": 0,
+                "position": "absolute",
+                "width": "100%",
+              }
+            }
+          >
+            <Text />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "alignSelf": "center",
+                "height": "100%",
+                "justifyContent": "center",
+                "minWidth": 25,
+                "opacity": 1,
+                "position": "absolute",
+                "width": "100%",
+              }
+            }
+          >
+            <Text />
+          </View>
+        </View>
+        <Text
+          allowFontScaling={true}
+          numberOfLines={1}
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "color": "#8E8E93",
+              "fontSize": 11,
+              "marginBottom": 1.5,
+              "textAlign": "center",
+            }
+          }
+        >
+          Phrases
+        </Text>
+      </View>
+      <View
+        accessibilityLabel="Links, tab, 3 of 4"
         accessible={true}
         hitSlop={
           Object {
@@ -461,7 +557,7 @@ exports[`App snapshot renders the root without loading screen 1`] = `
         </Text>
       </View>
       <View
-        accessibilityLabel="Settings, tab, 3 of 3"
+        accessibilityLabel="Settings, tab, 4 of 4"
         accessible={true}
         hitSlop={
           Object {
