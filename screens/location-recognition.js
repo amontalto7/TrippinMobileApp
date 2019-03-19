@@ -9,7 +9,7 @@ axios.get(URL).then(async response => {
     // const geoLoc = await recogLang(response.data.ip);
 
     const geoLoc = await recogLang("85.214.132.117");
-    console.log(geoLoc);
+    // console.log(geoLoc);
     translate(geoLoc.countryCode);
 
 });
