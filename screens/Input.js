@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, TextInput } from 'react-native';
 
-const Input = (props) => {
+const input = (props) => {
   return (
     <View style={styles.viewStyles} >
       <Text style={styles.textStyles}> {props.label} </Text>
@@ -36,4 +36,4 @@ const styles = {
   }
 }
 
-export default Input;
+export default input;

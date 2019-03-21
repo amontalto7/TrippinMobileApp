@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { View, Button } from 'react-native';
 import firebase from 'firebase';
-import Header from './src/components/Header';
-import LoginForm from './src/components/LoginForm';
+// import Header from '.screens/Header';
+// import LoginScreen from '../screens/LoginScreen';
 // import Config from './config';
 
-export default class App extends Component {
+export default class Authentication extends Component {
   state = { loggedIn: null };
 
   componentDidMount() {
     let config = {
       apiKey: 'AIzaSyClgUPqnDDpbVXrvcUmpbe48koNFPKCItU',
-      authDomain: 'trippin-7b858.firebaseapp.com',
-      databaseURL: 'https://trippin-7b858.firebaseio.com',
-      projectId: 'trippin-7b858',
-      storageBucket: 'trippin-7b858.appspot.com',
-      messagingSenderId: '111072986505'
+    authDomain: "trippin-7b858.firebaseapp.com",
+    databaseURL: "https://trippin-7b858.firebaseio.com",
+    projectId: "trippin-7b858",
+    storageBucket: "trippin-7b858.appspot.com",
+    messagingSenderId: "111072986505"
     };
 
     firebase.initializeApp(config);
@@ -35,16 +35,18 @@ export default class App extends Component {
         onPress={() => firebase.auth().signOut()} />)
     } else {
       return (
-        <LoginForm />
+        <LoginScreen />
       )
     }
   }
   render() {
     return (
       <View>
-        <Header title='Authenticator' />
+        <LoginScreen title='Authenticator' />
         {this.renderComponent()}
       </View>
     );
   }
 }
+
+export {Authentication};

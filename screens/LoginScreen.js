@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { View, Button, Text, ActivityIndicator } from 'react-native';
 import firebase from 'firebase';
 import Input from './Input';
+// import Authentication from '../navigation/Authentication';
 
-export default class LoginForm extends Component {
+export default class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = { email: '', password: '', error: '' };
@@ -76,6 +77,7 @@ export default class LoginForm extends Component {
         <Text style={styles.errorTextStyle}>
           {this.state.error}
         </Text>
+        {/* <Authentication /> */}
       </View>
     )
   }
