@@ -23,9 +23,23 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
+          ? `ios-home${focused ? "" : "-outline"}`
+          : "md-home"
       }
+    />
+  )
+};
+
+const LoginStack = createStackNavigator({
+  Login: LoginScreen
+});
+
+LoginStack.navigationOptions = {
+  tabBarLabel: "Login",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-log-in" : "md-log-in"}
     />
   )
 };
@@ -39,7 +53,7 @@ PhrasesStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+      name={Platform.OS === "ios" ? "ios-swap" : "md-swap"}
     />
   )
 };
@@ -73,10 +87,9 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  LoginScreen,
   HomeStack,
+  LoginStack,
   PhrasesStack,
   LinksStack,
   SettingsStack
-  
 });
