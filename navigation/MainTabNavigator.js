@@ -9,6 +9,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import PhrasesScreen from "../screens/PhrasesScreen";
 import LinksScreen from "../screens/LinksScreen";
+import LoginScreen from "../screens/LoginScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 
 const HomeStack = createStackNavigator({
@@ -72,8 +73,10 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
+  LoginScreen,
   HomeStack,
   PhrasesStack,
   LinksStack,
   SettingsStack
+  
 });
