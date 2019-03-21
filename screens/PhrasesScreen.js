@@ -72,6 +72,7 @@ export default class PhrasesScreen extends React.Component {
     return (
       <View>
         <Text>PHRASES</Text>
+        <Text>foo is equal to ${process.env.foo}</Text>
       </View>
     );
   }
