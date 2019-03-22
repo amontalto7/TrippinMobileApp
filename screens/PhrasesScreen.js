@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import Axios from "axios";
-import { TRIPIT_API_KEY, TRANSLATOR_TEXT_KEY } from "react-native-dotenv";
+import { TRANSLATOR_TEXT_KEY } from "react-native-dotenv";
 // const request = require("request");
 // const uuidv4 = require("uuid/v4");
 
