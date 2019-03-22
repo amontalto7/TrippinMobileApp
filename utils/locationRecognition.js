@@ -1,5 +1,5 @@
 const axios = require("axios");
-const translate = require("..screens/PhrasesScreen");
+const translate = require("../screens/PhrasesScreen");
 const recogLang = require("./languageRecognition");
 
 let URL = "https://www.ipapi.co/";
