@@ -1,9 +1,10 @@
 const Parser = require("rss-parser");
+
 const parser = new Parser();
-let countrieslist = [];
+const countrieslist = [];
 
 (async () => {
-  let feed = await parser.parseURL(
+  const feed = await parser.parseURL(
     "https://travel.state.gov/_res/rss/TAsTWs.xml"
   );
 
@@ -17,7 +18,7 @@ let countrieslist = [];
   //   console.log("feed length is: " + feed.items.length + " items");
 
   feed.items.forEach(item => {
-    let countryProfile = {
+    const countryProfile = {
       country: item.title.match(/.+?(?= -)/gm),
       content: item.contentSnippet,
       title: item.title,
@@ -30,5 +31,5 @@ let countrieslist = [];
     // console.log(countries);
     // console.log("\n" + item.title + "\n" + item.link + "\n");
   });
-  console.log(countrieslist);
+  // console.log(countrieslist);
 })();
