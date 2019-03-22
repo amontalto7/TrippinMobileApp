@@ -5,16 +5,35 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  Button,
   TouchableOpacity,
   View
 } from "react-native";
 import { WebBrowser } from "expo";
+import { Ionicons as Icon } from "@expo/vector-icons";
+import LogoTitle from "../components/LogoTitle";
 
 import { MonoText } from "../components/StyledText";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    headerTitle: <LogoTitle />,
+    headerLeft: (
+      <TouchableOpacity
+        onPress={() => {
+          this.props.navigation.navigate("DrawerToggle");
+        }}
+      >
+        <Icon
+          name="md-menu"
+          side={30}
+          iconStyle={{
+            padding: 15,
+            paddingTop: Platform.OS === "ios" ? 13 : 7
+          }}
+        />
+      </TouchableOpacity>
+    )
   };
 
   _handleLearnMorePress = () => {
@@ -39,17 +58,16 @@ export default class HomeScreen extends React.Component {
 
       return (
         <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
+          Development mode is enabled, your app will be slower but you can use
+          useful development tools. {learnMoreButton}
         </Text>
       );
-    } 
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    
+    }
+    return (
+      <Text style={styles.developmentModeText}>
+        You are not in development mode, your app will run at full speed.
+      </Text>
+    );
   }
 
   render() {
