@@ -1,6 +1,7 @@
 import React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { AppLoading, Asset, Font, Icon } from "expo";
+import firebase from "firebase";
 import DrawerNav from "./navigation/DrawerNav";
 import AppNavigator from "./navigation/AppNavigator";
 import HomeScreen from "./screens/HomeScreen";
@@ -36,6 +37,25 @@ export default class App extends React.Component {
   _handleFinishLoading = () => {
     this.setState({ isLoadingComplete: true });
   };
+  
+  componentDidMount(){
+        firebase.initializeApp({
+          apiKey: "AIzaSyClgUPqnDDpbVXrvcUmpbe48koNFPKCItU",
+          authDomain: "trippin-7b858.firebaseapp.com",
+          databaseURL: "https://trippin-7b858.firebaseio.com",
+          projectId: "trippin-7b858",
+          storageBucket: "trippin-7b858.appspot.com",
+          messagingSenderId: "111072986505"
+        });
+
+        firebase.auth().onAuthStateChanged(user => {
+              if (user) {
+                this.setState({ loggedIn: true });
+              } else {
+                this.setState({ loggedIn: false });
+              }
+            });
+  }
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
