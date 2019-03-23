@@ -2,7 +2,7 @@ import React from "react";
 import { createDrawerNavigator, DrawerItems } from "react-navigation";
 import { StyleSheet, Text, View } from "react-native";
 import HomeScreen from "../screens/HomeScreen";
-import LoginScreen from "../screens/LoginScreen";
+import LoginForm from "../components/LoginForm";
 import NotificationsScreen from "../screens/NotificationsScreen";
 
 const RootDrawer = createDrawerNavigator(
@@ -14,7 +14,7 @@ const RootDrawer = createDrawerNavigator(
       screen: NotificationsScreen
     },
     Login: {
-      screen: LoginScreen
+      screen: LoginForm
     }
   },
   {
