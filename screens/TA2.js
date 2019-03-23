@@ -17,13 +17,11 @@ const exampleCountry = {
 export default class TravelAdvisoryScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = { countries: [], key: 2 };
+    this.state = { countries: [], key: 0 };
   }
 
   pullCountriesList() {
-    let newKey = this.state.key + 1;
-
-    console.log(newKey);
+    // console.log("test");
     Axios.get("http://160.39.9.177:3001/api/travel_advisories")
       .then(response => {
         // console.log(response.data);
@@ -33,17 +31,18 @@ export default class TravelAdvisoryScreen extends Component {
         // console.log(countriesArray[0]);
         this.setState = {
           countries: countriesArray,
-          key: newKey
+          key: this.key + 1
         };
-        // console.log(this.state.key);
+        console.log(this.setState.countries.length);
         this.forceUpdate();
+
       })
       .catch(err => console.log(err));
   }
 
   render() {
     return (
-      <View key={this.state.countries.length}>
+      <View>
         <Button
           onPress={this.pullCountriesList.bind(this)}
           title="Load Travel Advisories"
