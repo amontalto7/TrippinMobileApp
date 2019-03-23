@@ -4,7 +4,7 @@ import Axios from "axios";
 
 export default class PhrasesScreen extends React.Component {
   static navigationOptions = {
-    title: "Phrases"
+    title: "Notifications"
   };
 
   render() {

@@ -12,20 +12,23 @@ import {
 import { WebBrowser } from "expo";
 import { Ionicons as Icon } from "@expo/vector-icons";
 import LogoTitle from "../components/LogoTitle";
+import MainDrawer from "../drawers/MainDrawer";
+import Location from "../components/Location";
 
 import { MonoText } from "../components/StyledText";
 
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     headerTitle: <LogoTitle />,
     headerLeft: (
       <TouchableOpacity
         onPress={() => {
           this.props.navigation.navigate("DrawerToggle");
+          console.log(navigation);
         }}
       >
         <Icon
-          name="md-menu"
+          name="ios-menu"
           side={30}
           iconStyle={{
             padding: 15,
@@ -34,7 +37,7 @@ export default class HomeScreen extends React.Component {
         />
       </TouchableOpacity>
     )
-  };
+  });
 
   _handleLearnMorePress = () => {
     WebBrowser.openBrowserAsync(
@@ -87,6 +90,8 @@ export default class HomeScreen extends React.Component {
               style={styles.welcomeImage}
             />
           </View>
+
+          <Location />
 
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
