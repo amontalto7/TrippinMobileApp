@@ -11,6 +11,7 @@ import PhrasesScreen from "../screens/PhrasesScreen";
 import LinksScreen from "../screens/LinksScreen";
 import LoginForm from "../components/LoginForm";
 import SettingsScreen from "../screens/SettingsScreen";
+import TravelAdvisoryScreen from "../screens/TravelAdvisoryScreen";
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen
@@ -72,6 +73,19 @@ LinksStack.navigationOptions = {
   )
 };
 
+const AlertStack = createStackNavigator({
+  Alerts: TravelAdvisoryScreen
+});
+AlertStack.navigationOptions = {
+  tabBarLabel: "Alerts",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-alert" : "md-alert"}
+    />
+  )
+};
+
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen
 });
@@ -91,5 +105,6 @@ export default createBottomTabNavigator({
   LoginStack,
   PhrasesStack,
   LinksStack,
+  AlertStack,
   SettingsStack
 });
