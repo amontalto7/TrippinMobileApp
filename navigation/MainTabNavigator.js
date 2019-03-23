@@ -9,7 +9,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import PhrasesScreen from "../screens/PhrasesScreen";
 import LinksScreen from "../screens/LinksScreen";
-import LoginScreen from "../screens/LoginScreen";
+import LoginForm from "../components/LoginForm";
 import SettingsScreen from "../screens/SettingsScreen";
 
 const HomeStack = createStackNavigator({
@@ -31,7 +31,7 @@ HomeStack.navigationOptions = {
 };
 
 const LoginStack = createStackNavigator({
-  Login: LoginScreen
+  Login: LoginForm
 });
 
 LoginStack.navigationOptions = {
