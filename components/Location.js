@@ -8,17 +8,52 @@ import {
   TouchableOpacity
 } from "react-native";
 
+import Axios from "axios";
+import { ACCUWEATHER_API_KEY } from "react-native-dotenv";
+
 export default class Location extends Component {
   state = {
-    location: null
+    lat: null,
+    lon: null,
+    // location: null,
+    city: null,
+    message: "Touch me"
   };
 
+  componentDidMount() {
+    this.findCoordinates;
+  }
+
   findCoordinates = () => {
+    // Get latitude / longitude based on your current location
     navigator.geolocation.getCurrentPosition(
       position => {
         const location = JSON.stringify(position);
+        // this.setState({ location });
+        this.setState({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        });
 
-        this.setState({ location });
+        const url = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${
+          process.env.ACCUWEATHER_API_KEY
+        }&q=${this.state.lat}%2C${this.state.lon}`;
+
+        Axios.get(url)
+          .then(response => {
+            this.setState({
+              city: response.data.AdministrativeArea.EnglishName,
+              message: `Welcome to ${
+                response.data.AdministrativeArea.EnglishName
+              }!`
+            });
+            console.log(response.data.AdministrativeArea.EnglishName);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
+        // console.log(url);
       },
       error => Alert.alert(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -29,8 +64,7 @@ export default class Location extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.findCoordinates}>
-          <Text>Find My Coords?</Text>
-          <Text>Location: {this.state.location}</Text>
+          <Text>{this.state.message}</Text>
         </TouchableOpacity>
       </View>
     );
