@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View } from "react-native";
 import firebase from "firebase";
 import { Header } from "./components/common";
-import LoginForm from "./components/LoginForm";
+import LoginScreen from "./screens/LoginScreen";
 
 
 class App extends Component {
@@ -59,7 +59,7 @@ class App extends Component {
     return (
       <View>
         <Header headerText="Authentication" />
-        <LoginForm />
+        <LoginScreen />
       </View>
     );
   }
