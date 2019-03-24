@@ -64,7 +64,7 @@ export default class Location extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.findCoordinates}>
-          <Text>{this.state.message}</Text>
+          <Text style={styles.welcome}>{this.state.message}</Text>
         </TouchableOpacity>
       </View>
     );
