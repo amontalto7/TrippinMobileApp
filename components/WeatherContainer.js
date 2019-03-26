@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Image, View, Text } from "react-native";
 import axios from "axios";
-import Location from "./Location";
 import { ACCUWEATHER_API_KEY } from "react-native-dotenv";
-const BASEURL = `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${ACCUWEATHER_API_KEY}=${Location}`;
+import Location from "./Location";
+
 export default class WeatherContainer extends Component {
   state = {
     locationKey: "",
@@ -12,13 +12,22 @@ export default class WeatherContainer extends Component {
     temp: ""
   };
 
-  search = () => {
-    axios.get(BASEURL).then(res => {
-      locationKey = res.data[0].Key;
-      this.setState({ locationKey: res.data[0].Key });
+  componentDidMount() {
+    this.search();
+  }
 
-      this.weatherSearch(res.data[0].Key);
-    });
+  search = () => {
+    const BASEURL = `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${ACCUWEATHER_API_KEY}&q=11211`;
+
+    axios
+      .get(BASEURL)
+      .then(res => {
+        locationKey = res.data[0].Key;
+        this.setState({ locationKey: res.data[0].Key });
+
+        this.weatherSearch(res.data[0].Key);
+      })
+      .catch(err => console.log(err));
   };
 
   weatherSearch = locationKey => {
@@ -36,9 +45,7 @@ export default class WeatherContainer extends Component {
       })
       .catch(err => console.log(err));
   };
-  componentDidMount() {
-    this.search();
-  }
+
   // renderWeatherIcon(num) {
   //   switch (num) {
   //     case 1:
