@@ -47,16 +47,16 @@ export default class WeatherContainer extends Component {
   };
 
   renderWeatherIcon(num) {
-        return (
-          <Image source={require(`../assets/images/weatherIcons/${num}.jpg`)} />
-        )
-    }
-  
+    console.log(num);
+    const imgUrl = `../assets/images/weatherIcons/01-s.png`;
+    return <Image source={require(imgUrl)} />;
+  }
+
   render() {
     return (
       <View>
         <Text>{this.state.temp} Weather</Text>
-        <Image>{this.renderWeatherIcon(this.state.num)}</Image>
+        {this.renderWeatherIcon(this.state.num)}
       </View>
     );
   }
