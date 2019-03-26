@@ -16,6 +16,7 @@ import MainDrawer from "../drawers/MainDrawer";
 import Location from "../components/Location";
 
 import { MonoText } from "../components/StyledText";
+import WeatherContainer from "../components/WeatherContainer";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -97,7 +98,7 @@ export default class HomeScreen extends React.Component {
             {this._maybeRenderDevelopmentModeWarning()}
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
-
+            <WeatherContainer />
             <View
               style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
             >
