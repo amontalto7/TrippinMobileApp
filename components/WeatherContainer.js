@@ -18,6 +18,7 @@ export default class WeatherContainer extends Component {
 
   search = () => {
     const BASEURL = `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${ACCUWEATHER_API_KEY}&q=11211`;
+    // console.log(BASEURL)
 
     axios
       .get(BASEURL)
@@ -47,9 +48,11 @@ export default class WeatherContainer extends Component {
   };
 
   renderWeatherIcon(num) {
-    console.log(num);
-    const imgUrl = `../assets/images/weatherIcons/01-s.png`;
-    return <Image source={require(imgUrl)} />;
+    let number = 0;
+    console.log("------" + this.state.num);
+    num === null ? console.log("hi") : console.log((number = num));
+    number < 10 ? console.log(`0${number}`) : console.log(number);
+    return <Image source={require(`../assets/images/weatherIcons/01-s.png`)} />;
   }
 
   render() {

@@ -39,7 +39,7 @@ export default class Location extends Component {
           process.env.ACCUWEATHER_API_KEY
         }&q=${this.state.lat}%2C${this.state.lon}`;
 
-        // console.log(url);
+        console.log(url);
 
         Axios.get(url)
           .then(response => {
