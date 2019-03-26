@@ -46,159 +46,17 @@ export default class WeatherContainer extends Component {
       .catch(err => console.log(err));
   };
 
-  // renderWeatherIcon(num) {
-  //   switch (num) {
-  //     case 1:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/01.jpg")} />
-  //       );
-  //     case 2:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/02.png")} />
-  //       );
-  //     case 3:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/03-s.png")} />
-  //       );
-  //     case 4:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 4:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 5:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-
-  //     case 6:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-
-  //     case 7:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 8:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 9:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 10:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 11:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 12:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 13:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-
-  //     case 14:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 15:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 16:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 17:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 18:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 19:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 20:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 21:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 22:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 23:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-
-  //     case 24:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 25:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 26:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 27:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 28:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 29:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 30:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 31:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 32:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 33:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //     case 34:
-  //       return (
-  //         <Image source={require("../assets/images/weatherIcons/04-s.png")} />
-  //       );
-  //   }
-  // }
+  renderWeatherIcon(num) {
+        return (
+          <Image source={require(`../assets/images/weatherIcons/${num}.jpg`)} />
+        )
+    }
+  
   render() {
     return (
       <View>
         <Text>{this.state.temp} Weather</Text>
-        {/* <Image>{this.renderWeatherIcon(this.state.num)}</Image> */}
+        <Image>{this.renderWeatherIcon(this.state.num)}</Image>
       </View>
     );
   }
