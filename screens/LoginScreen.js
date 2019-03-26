@@ -1,25 +1,37 @@
-import React, { Component } from 'react';
-import { Text } from 'react-native';
-import firebase from 'firebase';
-import { Button, Card, CardSection, Input, Spinner } from '../components/common';
+import React, { Component } from "react";
+import { Text } from "react-native";
+import firebase from "firebase";
+import {
+  Button,
+  Card,
+  CardSection,
+  Input,
+  Spinner
+} from "../components/common";
+
 
 class LoginScreen extends Component {
   state = {
-    email: '',
-    password: '',
-    error: '',
+    email: "",
+    password: "",
+    error: "",
     loading: false
   };
 
   onButtonPress() {
     const { email, password } = this.state;
 
-    this.setState({ error: '', loading: true });
+    this.setState({ error: "", loading: true });
+    
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
       .then(this.onLoginSuccess.bind(this))
       .catch(() => {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
           .then(this.onLoginSuccess.bind(this))
           .catch(this.onLoginFail.bind(this));
       });
@@ -27,30 +39,26 @@ class LoginScreen extends Component {
 
   onLoginSuccess() {
     this.setState({
-      email: '',
-      password: '',
-      error: '',
-      loading: false
+      email: "",
+      password: "",
+      error: "",
+      loading: true
     });
   }
 
   onLoginFail() {
     this.setState({
-      error: 'Authentication Failed',
+      error: "Authentication Failed",
       loading: false
     });
   }
 
   renderButton() {
     if (this.state.loading) {
-      return <Spinner size='small' />;
+      // return <Spinner size="small" />;
     }
 
-    return (
-      <Button onPress={this.onButtonPress.bind(this)}>
-        Log in
-      </Button>
-    );
+    return <Button onPress={this.onButtonPress.bind(this)}>Log in</Button>;
   }
 
   render() {
@@ -58,8 +66,8 @@ class LoginScreen extends Component {
       <Card>
         <CardSection>
           <Input
-            label='Email'
-            placeholder='abcd@email.com'
+            label="Email"
+            placeholder="abcd@email.com"
             value={this.state.email}
             onChangeText={email => this.setState({ email })}
           />
@@ -68,30 +76,28 @@ class LoginScreen extends Component {
         <CardSection>
           <Input
             secureTextEntry
-            label='Password'
-            placeholder='password'
+            label="Password"
+            placeholder="password"
             value={this.state.password}
             onChangeText={text => this.setState({ password: text })}
           />
         </CardSection>
 
-        <Text style={styles.errorTextStyle}>
-          {this.state.error}
-        </Text>
+        <Text style={styles.errorTextStyle}>{this.state.error}</Text>
 
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
+        <CardSection>{this.renderButton()}</CardSection>
       </Card>
+      
     );
+    
   }
 }
 
 const styles = {
   errorTextStyle: {
     fontSize: 20,
-    alignSelf: 'center',
-    color: 'red'
+    alignSelf: "center",
+    color: "red"
   }
 };
 
