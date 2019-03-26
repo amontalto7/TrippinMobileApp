@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import firebase from 'firebase';
-import { Button, Card, CardSection, Input, Spinner } from '../components/common';
+import { Button, Card, CardSection, Input, Spinner } from './common';
 
-class LoginScreen extends Component {
+class LoginForm extends Component {
   state = {
     email: '',
     password: '',
@@ -95,4 +95,4 @@ const styles = {
   }
 };
 
-export default LoginScreen;
+export default LoginForm;
