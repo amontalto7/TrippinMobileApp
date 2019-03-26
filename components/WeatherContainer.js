@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Search from "./Search";
 import { Image, View, Text } from "react-native";
 import axios from "axios";
 import Location from "./Location";
@@ -191,7 +190,7 @@ export default class WeatherContainer extends Component {
   render() {
     return (
       <View>
-        <Text>{this.state.temp} HELLOO!</Text>
+        <Text>{this.state.temp} Weather</Text>
         {/* <Image>{this.renderWeatherIcon(this.state.num)}</Image> */}
       </View>
     );
