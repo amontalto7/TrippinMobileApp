@@ -10,7 +10,7 @@ import HomeScreen from "../screens/HomeScreen";
 import PhrasesScreen from "../screens/PhrasesScreen";
 import LinksScreen from "../screens/LinksScreen";
 import LoginScreen from "../screens/LoginScreen";
-import SignupScreen from "../screens/SignupScreen"
+import SignupScreen from "../screens/SignupScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import TravelAdvisoryScreen from "../screens/TravelAdvisoryScreen";
 
