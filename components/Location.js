@@ -17,18 +17,18 @@ export default class Location extends Component {
     lon: null,
     // location: null,
     city: null,
-    message: "Touch me"
+    message: "..."
   };
 
   componentDidMount() {
-    this.findCoordinates;
+    this.findCoordinates();
   }
 
   findCoordinates = () => {
     // Get latitude / longitude based on your current location
     navigator.geolocation.getCurrentPosition(
       position => {
-        const location = JSON.stringify(position);
+        // const location = JSON.stringify(position);
         // this.setState({ location });
         this.setState({
           lat: position.coords.latitude,
@@ -39,6 +39,8 @@ export default class Location extends Component {
           process.env.ACCUWEATHER_API_KEY
         }&q=${this.state.lat}%2C${this.state.lon}`;
 
+        // console.log(url);
+
         Axios.get(url)
           .then(response => {
             this.setState({
@@ -47,9 +49,10 @@ export default class Location extends Component {
                 response.data.AdministrativeArea.EnglishName
               }!`
             });
-            console.log(response.data.AdministrativeArea.EnglishName);
+            // console.log(response.data.AdministrativeArea.EnglishName);
           })
           .catch(err => {
+            console.log("API error:");
             console.log(err);
           });
 
@@ -63,9 +66,9 @@ export default class Location extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.findCoordinates}>
-          <Text style={styles.welcome}>{this.state.message}</Text>
-        </TouchableOpacity>
+        {/* <TouchableOpacity onPress={this.findCoordinates}> */}
+        <Text style={styles.welcome}>{this.state.message}</Text>
+        {/* </TouchableOpacity> */}
       </View>
     );
   }
