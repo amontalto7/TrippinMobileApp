@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { WebBrowser } from "expo";
 import { Ionicons as Icon } from "@expo/vector-icons";
+import Axios from "axios";
+import { ACCUWEATHER_API_KEY } from "react-native-dotenv";
 import LogoTitle from "../components/LogoTitle";
 import MainDrawer from "../drawers/MainDrawer";
 import Location from "../components/Location";
@@ -40,39 +42,56 @@ export default class HomeScreen extends React.Component {
     )
   });
 
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/development-mode"
-    );
+  state = {
+    lat: null,
+    lon: null,
+    // location: null,
+    city: null,
+    message: "New York"
   };
 
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
-    );
-  };
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use
-          useful development tools. {learnMoreButton}
-        </Text>
-      );
-    }
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode, your app will run at full speed.
-      </Text>
-    );
+  componentDidMount() {
+    this.findCoordinates();
   }
+
+  findCoordinates = () => {
+    // Get latitude / longitude based on your current location
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        // const location = JSON.stringify(position);
+        // this.setState({ location });
+        this.setState({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        });
+
+        const url = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${ACCUWEATHER_API_KEY}&q=${
+          this.state.lat
+        }%2C${this.state.lon}`;
+
+        console.log(url);
+
+        Axios.get(url)
+          .then(response => {
+            this.setState({
+              city: response.data.AdministrativeArea.EnglishName,
+              message: `Welcome to ${
+                response.data.AdministrativeArea.EnglishName
+              }!`
+            });
+            // console.log(response.data.AdministrativeArea.EnglishName);
+          })
+          .catch(err => {
+            console.log("API error:");
+            console.log(err);
+          });
+
+        // console.log(url);
+      },
+      error => Alert.alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  };
 
   render() {
     return (
@@ -90,37 +109,8 @@ export default class HomeScreen extends React.Component {
               }
               style={styles.welcomeImage}
             />
-          </View>
-
-          <Location />
-
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
+            <Location message={this.state.message} />
             <WeatherContainer />
-            <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-            >
-              <MonoText style={styles.codeHighlightText}>
-                screens/HomeScreen.js
-              </MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity
-              onPress={this._handleHelpPress}
-              style={styles.helpLink}
-            >
-              <Text style={styles.helpLinkText}>
-                Help, it didn’t automatically reload!
-              </Text>
-            </TouchableOpacity>
           </View>
         </ScrollView>
 
