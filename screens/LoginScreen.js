@@ -11,6 +11,10 @@ import {
 
 
 class LoginScreen extends Component {
+  static navigationOptions = {
+    title: "Login"
+   };
+
   state = {
     email: "",
     password: "",
@@ -86,6 +90,15 @@ class LoginScreen extends Component {
         <Text style={styles.errorTextStyle}>{this.state.error}</Text>
 
         <CardSection>{this.renderButton()}</CardSection>
+        <CardSection>
+          <Button
+            title="Go to Signup screen"
+            // eslint-disable-next-line react/destructuring-assignment
+            // eslint-disable-next-line react/prop-types
+            onPress={() => this.props.navigation.navigate("Signup")}
+          > Sign Up Here!
+          </Button>
+        </CardSection>
       </Card>
       
     );
