@@ -3,6 +3,7 @@ import { Image, View, Text } from "react-native";
 import axios from "axios";
 import { ACCUWEATHER_API_KEY } from "react-native-dotenv";
 import Location from "./Location";
+import weatherIcons from "../assets/images/weatherIcons/weatherIcons";
 
 export default class WeatherContainer extends Component {
   state = {
@@ -39,27 +40,25 @@ export default class WeatherContainer extends Component {
       .then(data => {
         console.log(data.data[0].Temperature.Imperial.Value);
         this.setState({
-          temp: `${data.data[0].Temperature.Imperial.Value}
-              ${data.data[0].Temperature.Imperial.Unit}`,
+          temp: `${data.data[0].Temperature.Imperial.Value} ${
+            data.data[0].Temperature.Imperial.Unit
+          }`,
           num: data.data[0].WeatherIcon
         });
+        console.log(this.state.temp);
       })
       .catch(err => console.log(err));
   };
 
   renderWeatherIcon(num) {
-    let number = 0;
-    console.log("------" + this.state.num);
-    num === null ? console.log("hi") : console.log((number = num));
-    number < 10 ? console.log(`0${number}`) : console.log(number);
-    return <Image source={require(`../assets/images/weatherIcons/01-s.png`)} />;
+    return <Image source={weatherIcons[num]} />;
   }
 
   render() {
     return (
       <View>
-        <Text>{this.state.temp} Weather</Text>
-        {this.renderWeatherIcon(this.state.num)}
+        <Text>{this.state.temp}</Text>
+        {this.state.num && this.renderWeatherIcon(this.state.num)}
       </View>
     );
   }
