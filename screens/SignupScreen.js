@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Button } from "react-native";
-
 import t from "tcomb-form-native";
 import firebase from "firebase";
 import { FIREBASE_API_KEY } from "react-native-dotenv";
@@ -64,7 +63,6 @@ const options = {
 };
 
 export default class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -72,7 +70,6 @@ export default class App extends Component {
       password: '',
       terms: false,
       username: ''
-
     }
     this.writeUserData = this.writeUserData.bind(this);
     this.readUserData = this.readUserData.bind(this);
@@ -80,11 +77,11 @@ export default class App extends Component {
   }
   // handleChange(e) {
   //   this.setState({
-  //     name: e.nativeEvent.text
+  //     email: e.nativeEvent.text
   //   });
   // }
   // handleSubmit() {
-  //   console.log(this.state.email)
+  //   console.log(this.state.email);
   // }
   
   writeUserData = () => {
