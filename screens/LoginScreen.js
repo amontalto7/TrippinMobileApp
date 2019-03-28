@@ -1,102 +1,117 @@
-// /* eslint-disable no-undef */
-// import React, { Component } from 'react';
-// import { View, Button, Text, ActivityIndicator } from 'react-native';
-// // import * as firebase from 'firebase';
-// import Input from './Input';
-// import Authentication from '../navigation/Authentication';
+import React, { Component } from "react";
+import { Text } from "react-native";
+import firebase from "firebase";
+import {
+  Button,
+  Card,
+  CardSection,
+  Input,
+  Spinner
+} from "../components/common";
 
 
+class LoginScreen extends Component {
+  static navigationOptions = {
+    title: "Login"
+   };
 
-// export default class LoginScreen extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { email: '', password: '', error: '' };
-//   }
+  state = {
+    email: "",
+    password: "",
+    error: "",
+    loading: false
+  };
 
-//   onButtonPress() {
-//     this.setState({ error: '', loading: true })
-//     const { email, password } = this.state;
-//     firebaseApp.auth().signInWithEmailAndPassword(email, password)
-//       .then(this.onLoginSuccess.bind(this))
-//       .catch(() => {
-//         firebaseApp.auth().createUserWithEmailAndPassword(email, password)
-//           .then(this.onLoginSuccess.bind(this))
-//           .catch((error) => {
-//             let errorCode = error.code
-//             let errorMessage = error.message;
-//             if (errorCode == 'auth/weak-password') {
-//               this.onLoginFailure.bind(this)('Weak password!')
-//             } else {
-//               this.onLoginFailure.bind(this)(errorMessage)
-//             }
-//           });
-//       });
-//   }
+  onButtonPress() {
+    const { email, password } = this.state;
 
-//   onLoginSuccess() {
-//     this.setState({
-//       email: '', password: '', error: '', loading: false
-//     })
-//   }
+    this.setState({ error: "", loading: true });
+    
 
-//   onLoginFailure(errorMessage) {
-//     this.setState({ error: errorMessage, loading: false })
-//   }
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(this.onLoginSuccess.bind(this))
+      .catch(() => {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(this.onLoginSuccess.bind(this))
+          .catch(this.onLoginFail.bind(this));
+      });
+  }
 
-//   renderButton() {
-//     if (this.state.loading) {
-//       return (
-//         <View style={styles.spinnerStyle}>
-//           <ActivityIndicator size={"small"} />
-//         </View>
-//       )
-//     } else {
-//       return (
-//         <Button
-//           title="Sign in"
-//           onPress={this.onButtonPress.bind(this)}
-//         />
-//       )
-//     }
-//   }
+  onLoginSuccess() {
+    this.setState({
+      email: "",
+      password: "",
+      error: "",
+      loading: true
+    });
+  }
 
-//   render() {
-//     return (
-//       <View>
-//         <Input label="Email"
-//           placeholder="user@mail.com"
-//           value={this.state.email}
-//           secureTextEntry={false}
-//           onChangeText={email => this.setState({ email })} />
+  onLoginFail() {
+    this.setState({
+      error: "Authentication Failed",
+      loading: false
+    });
+  }
 
-//         <Input label="Password"
-//           placeholder="password"
-//           value={this.state.password}
-//           secureTextEntry={true}
-//           onChangeText={password => this.setState({ password })} />
+  renderButton() {
+    if (this.state.loading) {
+      // return <Spinner size="small" />;
+    }
 
-//         {this.renderButton()}
-        
-//         <Text style={styles.errorTextStyle}>
-//           {this.state.error}
-//         </Text>
-//         <Authentication />
-//       </View>
-//     )
-//   }
-// }
+    return <Button onPress={this.onButtonPress.bind(this)}>Log in</Button>;
+  }
 
-// const styles = {
-//   errorTextStyle: {
-//     fontSize: 16,
-//     alignSelf: 'center',
-//     color: 'red'
-//   },
-//   spinnerStyle: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center'
-//   }
-// }
+  render() {
+    return (
+      <Card>
+        <CardSection>
+          <Input
+            label="Email"
+            placeholder="abcd@email.com"
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
+          />
+        </CardSection>
 
-// const firebaseApp = firebase.initializeApp(firebaseConfig);
+        <CardSection>
+          <Input
+            secureTextEntry
+            label="Password"
+            placeholder="password"
+            value={this.state.password}
+            onChangeText={text => this.setState({ password: text })}
+          />
+        </CardSection>
+
+        <Text style={styles.errorTextStyle}>{this.state.error}</Text>
+
+        <CardSection>{this.renderButton()}</CardSection>
+        <CardSection>
+          <Button
+            title="Go to Signup screen"
+            // eslint-disable-next-line react/destructuring-assignment
+            // eslint-disable-next-line react/prop-types
+            onPress={() => this.props.navigation.navigate("Signup")}
+          > Sign Up Here!
+          </Button>
+        </CardSection>
+      </Card>
+      
+    );
+    
+  }
+}
+
+const styles = {
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: "center",
+    color: "red"
+  }
+};
+
+export default LoginScreen;
