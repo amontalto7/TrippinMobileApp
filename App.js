@@ -1,6 +1,8 @@
 import React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { AppLoading, Asset, Font, Icon } from "expo";
+import firebase from "firebase";
+import { FIREBASE_API_KEY } from "react-native-dotenv";
 import DrawerNav from "./navigation/DrawerNav";
 import AppNavigator from "./navigation/AppNavigator";
 import HomeScreen from "./screens/HomeScreen";
@@ -10,6 +12,25 @@ export default class App extends React.Component {
   state = {
     isLoadingComplete: false
   };
+
+  componentDidMount() {
+    firebase.initializeApp({
+      apiKey: FIREBASE_API_KEY,
+      authDomain: "trippin-7b858.firebaseapp.com",
+      databaseURL: "https://trippin-7b858.firebaseio.com",
+      projectId: "trippin-7b858",
+      storageBucket: "trippin-7b858.appspot.com",
+      messagingSenderId: "111072986505"
+    });
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ loggedIn: true });
+      } else {
+        this.setState({ loggedIn: false });
+      }
+    });
+  }
 
   _loadResourcesAsync = async () => {
     return Promise.all([

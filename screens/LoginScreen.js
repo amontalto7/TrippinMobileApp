@@ -1,102 +1,131 @@
-// /* eslint-disable no-undef */
-// import React, { Component } from 'react';
-// import { View, Button, Text, ActivityIndicator } from 'react-native';
-// // import * as firebase from 'firebase';
-// import Input from './Input';
-// import Authentication from '../navigation/Authentication';
+/* eslint-disable react/destructuring-assignment */
+import React, { Component } from "react";
+import { Text } from "react-native";
+import firebase from "firebase";
+import {
+  Button,
+  Card,
+  CardSection,
+  Input,
+  Spinner
+} from "../components/common";
 
+class LoginScreen extends Component {
+  static navigationOptions = {
+    title: "Login"
+  };
 
+  state = {
+    email: "",
+    password: "",
+    error: "",
+    loading: false
+  };
 
-// export default class LoginScreen extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { email: '', password: '', error: '' };
-//   }
+  onButtonPress() {
+    const { email, password } = this.state;
 
-//   onButtonPress() {
-//     this.setState({ error: '', loading: true })
-//     const { email, password } = this.state;
-//     firebaseApp.auth().signInWithEmailAndPassword(email, password)
-//       .then(this.onLoginSuccess.bind(this))
-//       .catch(() => {
-//         firebaseApp.auth().createUserWithEmailAndPassword(email, password)
-//           .then(this.onLoginSuccess.bind(this))
-//           .catch((error) => {
-//             let errorCode = error.code
-//             let errorMessage = error.message;
-//             if (errorCode == 'auth/weak-password') {
-//               this.onLoginFailure.bind(this)('Weak password!')
-//             } else {
-//               this.onLoginFailure.bind(this)(errorMessage)
-//             }
-//           });
-//       });
-//   }
+    this.setState({ error: "", loading: true });
 
-//   onLoginSuccess() {
-//     this.setState({
-//       email: '', password: '', error: '', loading: false
-//     })
-//   }
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(this.onLoginSuccess.bind(this))
+      .catch(() => {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(this.onLoginSuccess.bind(this))
+          .catch(this.onLoginFail.bind(this));
+      });
+  }
 
-//   onLoginFailure(errorMessage) {
-//     this.setState({ error: errorMessage, loading: false })
-//   }
+  onLoginSuccess() {
+    this.setState({
+      email: "",
+      password: "",
+      error: "",
+      loading: true
+    });
+    {
+      this.props.navigation.navigate("Home");
+    }
+  }
 
-//   renderButton() {
-//     if (this.state.loading) {
-//       return (
-//         <View style={styles.spinnerStyle}>
-//           <ActivityIndicator size={"small"} />
-//         </View>
-//       )
-//     } else {
-//       return (
-//         <Button
-//           title="Sign in"
-//           onPress={this.onButtonPress.bind(this)}
-//         />
-//       )
-//     }
-//   }
+  onLoginFail() {
+    this.setState({
+      error: "Authentication Failed",
+      loading: false
+    });
+  }
 
-//   render() {
-//     return (
-//       <View>
-//         <Input label="Email"
-//           placeholder="user@mail.com"
-//           value={this.state.email}
-//           secureTextEntry={false}
-//           onChangeText={email => this.setState({ email })} />
+  renderButton() {
+    if (this.state.loading) {
+      // return <Spinner size="small" />;
+    }
 
-//         <Input label="Password"
-//           placeholder="password"
-//           value={this.state.password}
-//           secureTextEntry={true}
-//           onChangeText={password => this.setState({ password })} />
+    return (
+      <Button title="Go to home page" 
+      onPress={this.onButtonPress.bind(this)}>
+        Log in
+      </Button>
+    );
+  }
+  //   <Button
+  //   title="Go to Signup screen"
+  //   // eslint-disable-next-line react/destructuring-assignment
+  //   // eslint-disable-next-line react/prop-types
+  //   onPress={() => this.props.navigation.navigate("Home")}
+  // > Sign Up Here!
+  // </Button>
 
-//         {this.renderButton()}
-        
-//         <Text style={styles.errorTextStyle}>
-//           {this.state.error}
-//         </Text>
-//         <Authentication />
-//       </View>
-//     )
-//   }
-// }
+  render() {
+    return (
+      <Card>
+        <CardSection>
+          <Input
+            label="Email"
+            placeholder="abcd@email.com"
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
+          />
+        </CardSection>
 
-// const styles = {
-//   errorTextStyle: {
-//     fontSize: 16,
-//     alignSelf: 'center',
-//     color: 'red'
-//   },
-//   spinnerStyle: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center'
-//   }
-// }
+        <CardSection>
+          <Input
+            secureTextEntry
+            label="Password"
+            placeholder="password"
+            value={this.state.password}
+            onChangeText={text => this.setState({ password: text })}
+          />
+        </CardSection>
 
-// const firebaseApp = firebase.initializeApp(firebaseConfig);
+        <Text style={styles.errorTextStyle}>{this.state.error}</Text>
+
+        <CardSection>{this.renderButton()}</CardSection>
+        <CardSection>
+          <Button
+            title="Go to Signup screen"
+            // eslint-disable-next-line react/destructuring-assignment
+            // eslint-disable-next-line react/prop-types
+            onPress={() => this.props.navigation.navigate("Signup")}
+          >
+            {" "}
+            Sign Up Here!
+          </Button>
+        </CardSection>
+      </Card>
+    );
+  }
+}
+
+const styles = {
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: "center",
+    color: "red"
+  }
+};
+
+export default LoginScreen;
