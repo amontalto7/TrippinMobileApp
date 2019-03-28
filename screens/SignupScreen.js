@@ -1,15 +1,19 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable no-undef */
+/* eslint-disable react/no-unused-state */
+/* eslint-disable no-console */
+/* eslint-disable react/no-string-refs */
 import React, { Component } from "react";
 import { View, StyleSheet, Button } from "react-native";
 import t from "tcomb-form-native";
 import firebase from "firebase";
 import { FIREBASE_API_KEY } from "react-native-dotenv";
-
+import HomeScreen from "./HomeScreen";
 
 const Form = t.form.Form;
 
 const User = t.struct({
   email: t.String,
-  username: t.maybe(t.String),
   password: t.String,
   terms: t.Boolean
 });
@@ -44,7 +48,8 @@ const options = {
       error: "Oops, seems like you forgot to enter an email"
     },
     password: {
-      error: "Please enter a password"
+      error: "Please enter a password",
+      secureTextEntry: true
     },
     terms: {
       label: "Agree to Terms"
@@ -57,11 +62,10 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      terms: false,
-      username: ''
-    }
+      email: "",
+      password: "",
+      terms: false
+    };
     this.writeUserData = this.writeUserData.bind(this);
     this.readUserData = this.readUserData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -74,22 +78,21 @@ export default class App extends Component {
   // handleSubmit() {
   //   console.log(this.state.email);
   // }
-  
-  writeUserData = ({ email, password, terms, username }) => {
-    console.log('WRITING USER DATA', email);
+
+  writeUserData = ({ email, password, terms }) => {
+    console.log( email);
     firebase
       .database()
       .ref("Users/")
-      .set({
+      .push({
         email,
         password,
-        terms,
-        username
+        terms
       })
       .then(data => {
-        //success callback => this could be the data I just wrote
-        console.log("data ", data);
-        this.readUserData();
+        // success callback => this could be the data I just wrote
+        // console.log("data ", data);
+        this.readUserData(email);
       })
       .catch(error => {
         //error callback
@@ -101,8 +104,9 @@ export default class App extends Component {
     firebase
       .database()
       .ref("Users/")
+      // eslint-disable-next-line func-names
       .once("value", function(snapshot) {
-        console.log('readUserData SNAPSHOT', snapshot.val());
+        // console.log(snapshot.val().email);
       });
   };
 
@@ -114,16 +118,33 @@ export default class App extends Component {
     this.setState({ error: "", loading: true });
 
     // if (email && password && terms && username) {
-      this.writeUserData(value);
+    this.writeUserData(value);
+    {
+      this.props.navigation.navigate("Home");
+    }
     // }
-  };
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <Form ref="form" type={User} options={options} />
         <Button title="Sign Up!" onPress={this.handleSubmit} />
-        {/* <Database /> */}
+        {/*Button to go to the next activity*/}
+        {/* <Button
+          title=""
+          // Button Title
+          onPress={() =>
+            this.props.navigation.navigate("Home", {
+              JSON_ListView_Clicked_Item: this.state.email
+            })
+          }
+          //On click of the button we will send
+          //the data as a Json from here to the Second Screen using navigation prop
+        >
+          {" "}
+          Welcome: {this.state.email}
+        </Button> */}
       </View>
     );
   }
@@ -137,4 +158,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff"
   }
 });
-
