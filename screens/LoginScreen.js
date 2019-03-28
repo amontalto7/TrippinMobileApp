@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from "react";
 import { Text } from "react-native";
 import firebase from "firebase";
@@ -9,11 +10,10 @@ import {
   Spinner
 } from "../components/common";
 
-
 class LoginScreen extends Component {
   static navigationOptions = {
     title: "Login"
-   };
+  };
 
   state = {
     email: "",
@@ -26,7 +26,6 @@ class LoginScreen extends Component {
     const { email, password } = this.state;
 
     this.setState({ error: "", loading: true });
-    
 
     firebase
       .auth()
@@ -48,6 +47,9 @@ class LoginScreen extends Component {
       error: "",
       loading: true
     });
+    {
+      this.props.navigation.navigate("Home");
+    }
   }
 
   onLoginFail() {
@@ -62,8 +64,20 @@ class LoginScreen extends Component {
       // return <Spinner size="small" />;
     }
 
-    return <Button onPress={this.onButtonPress.bind(this)}>Log in</Button>;
+    return (
+      <Button title="Go to home page" 
+      onPress={this.onButtonPress.bind(this)}>
+        Log in
+      </Button>
+    );
   }
+  //   <Button
+  //   title="Go to Signup screen"
+  //   // eslint-disable-next-line react/destructuring-assignment
+  //   // eslint-disable-next-line react/prop-types
+  //   onPress={() => this.props.navigation.navigate("Home")}
+  // > Sign Up Here!
+  // </Button>
 
   render() {
     return (
@@ -96,13 +110,13 @@ class LoginScreen extends Component {
             // eslint-disable-next-line react/destructuring-assignment
             // eslint-disable-next-line react/prop-types
             onPress={() => this.props.navigation.navigate("Signup")}
-          > Sign Up Here!
+          >
+            {" "}
+            Sign Up Here!
           </Button>
         </CardSection>
       </Card>
-      
     );
-    
   }
 }
 

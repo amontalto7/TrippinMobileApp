@@ -33,7 +33,8 @@ HomeStack.navigationOptions = {
 };
 
 const LoginStack = createStackNavigator({
-  Login: LoginScreen
+  Login: LoginScreen,
+  Signup: SignupScreen
 });
 
 LoginStack.navigationOptions = {
@@ -87,20 +88,6 @@ AlertStack.navigationOptions = {
   )
 };
 
-const SignupStack = createStackNavigator({
-  Signup: SignupScreen
-});
-
-SignupStack.navigationOptions = {
-  tabBarLabel: "Sign up",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
-    />
-  )
-};
-
 const SettingsStack = createStackNavigator({
   Settings: SettingsScreen
 });
@@ -118,7 +105,6 @@ SettingsStack.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack,
   LoginStack,
-  SignupStack,
   PhrasesStack,
   LinksStack,
   AlertStack,
