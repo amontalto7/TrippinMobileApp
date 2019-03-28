@@ -8,7 +8,8 @@ import {
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import PhrasesScreen from "../screens/PhrasesScreen";
-import LinksScreen from "../screens/LinksScreen";
+// import LinksScreen from "../screens/LinksScreen";
+import ChecklistScreen from "../screens/ChecklistScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignupScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -61,16 +62,30 @@ PhrasesStack.navigationOptions = {
   )
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen
+// const LinksStack = createStackNavigator({
+//   Links: LinksScreen
+// });
+
+// LinksStack.navigationOptions = {
+//   tabBarLabel: "Links",
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+//     />
+//   )
+// };
+
+const ChecklistStack = createStackNavigator({
+  Links: ChecklistScreen
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: "Links",
+ChecklistStack.navigationOptions = {
+  tabBarLabel: "Pack",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+      name={Platform.OS === "ios" ? "ios-checkbox" : "md-checkbox"}
     />
   )
 };
@@ -106,7 +121,8 @@ export default createBottomTabNavigator({
   HomeStack,
   LoginStack,
   PhrasesStack,
-  LinksStack,
+  ChecklistStack,
+  // LinksStack,
   AlertStack,
   SettingsStack
 });

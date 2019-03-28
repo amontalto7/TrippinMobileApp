@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, View, Text } from "react-native";
+import { Image, View, Text, StyleSheet } from "react-native";
 import axios from "axios";
 import { ACCUWEATHER_API_KEY } from "react-native-dotenv";
 import Location from "./Location";
@@ -51,15 +51,33 @@ export default class WeatherContainer extends Component {
   };
 
   renderWeatherIcon(num) {
-    return <Image source={weatherIcons[num]} />;
+    return <Image source={weatherIcons[num]} style={styles.weatherImage} />;
   }
 
   render() {
     return (
-      <View>
-        <Text>{this.state.temp}</Text>
+      <View style={styles.container}>
         {this.state.num && this.renderWeatherIcon(this.state.num)}
+        <Text>
+          Current temperature:
+          <Text style={styles.temperature}> {this.state.temp}</Text>
+        </Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  temperature: {
+    fontSize: 20,
+    fontWeight: "bold"
+  },
+  weatherImage: {
+    width: 100,
+    height: 100
+  }
+});

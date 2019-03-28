@@ -1,24 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
-import { ListItem } from 'react-native-elements';
-// import console = require("console");
-// import Axios from "axios";
-// import console = require("console");
-// import console = require("console");
-// const request = require("request");
-// const uuidv4 = require("uuid/v4");
-const list = [
-  {
-    name: 'Amy Farha',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: 'Vice President'
-  },
-  {
-    name: 'Chris Jackson',
-    avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-    subtitle: 'Vice Chairman'
-  }
-];
+import { StyleSheet, Text, View, FlatList, Dimensions } from "react-native";
+import { ListItem } from "react-native-elements";
+import Loader from "../components/Loader";
 
 export default class PhrasesScreen extends React.Component {
   static navigationOptions = {
@@ -28,24 +11,50 @@ export default class PhrasesScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       data: [],
       isReady: true
     };
   }
 
+  async getCoordinates() {
+    console.log("start loading animation");
+  }
+
+  async getPhrases() {
+    this.setState({
+      loading: true
+    });
+
+    try {
+      const response = await fetch(
+        "https://trippin-api-2019.herokuapp.com/api/phrases_translated",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      )
+        .then(response => response.json())
+        .then(responseData => {
+          console.log(`Translated data ${responseData}`);
+          this.setState({ data: responseData, isReady: true }); // when response came change the status.
+        })
+        .done();
+    } catch (e) {
+      return {};
+    }
+
+    setTimeout(() => {
+      this.setState({
+        loading: false
+      });
+    }, 3000);
+  }
+
   componentWillMount() {
-    fetch('https://trippin-api-2019.herokuapp.com/api/phrases_translated', {
-      'method': 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
-      .then(response => response.json())
-      .then(responseData => {
-        console.log(`Translated data ${responseData}`);
-        this.setState({ data: responseData, isReady: true }); //when response came change the status.
-      })
-      .done();
+    const phrases = this.getPhrases();
   }
 
   renderItem = ({ item }) => (
@@ -60,14 +69,17 @@ export default class PhrasesScreen extends React.Component {
   );
 
   render() {
-    const { isReady } = this.state; //check the state if response is ready render view
+    const { isReady } = this.state; // check the state if response is ready render view
     if (isReady) {
       return (
-        <FlatList
-          keyExtractor={this.keyExtractor}
-          data={this.state.data}
-          renderItem={this.renderItem}
-        />
+        <View style={styles.container}>
+          <Loader loading={this.state.loading} />
+          <FlatList
+            keyExtractor={(item, index) => item.id}
+            data={this.state.data}
+            renderItem={this.renderItem}
+          />
+        </View>
       );
     }
     return <View />;
@@ -76,9 +88,14 @@ export default class PhrasesScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
+    // display: "flex",
+    // alignItems: "flex-start",
     paddingTop: 15,
-    backgroundColor: "#fff"
+    backgroundColor: "#CCCCCC",
+    height: Dimensions.get("window").height,
+    width: "100%",
+    paddingTop: 50
   }
 });
 
