@@ -2,7 +2,7 @@ const axios = require("axios");
 
 let languageDetected;
 // var ip = '160.39.7.165'
-const access_key = process.env.access_key;
+const access_key = process.env.ACCESS_KEY;
 // console.log(access_key);
 
 function recogLang(ip) {
