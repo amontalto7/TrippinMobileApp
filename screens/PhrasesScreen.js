@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
     // flex: 1,
     // display: "flex",
     // alignItems: "flex-start",
-    paddingTop: 15,
+    // paddingTop: 15,
     backgroundColor: "#CCCCCC",
     height: Dimensions.get("window").height,
-    width: "100%",
-    paddingTop: 50
+    width: "100%"
+    // paddingTop: 50
   }
 });
 
