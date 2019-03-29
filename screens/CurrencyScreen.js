@@ -36,8 +36,9 @@ class CurrencyScreen extends Component {
     console.log('press exchange');
     console.log(this.state.text+ 'hi');
     change = this.state.text * this.state.conversion
-    console.log(change+'yo')
-    this.setState({change:change})
+    fixedChange = change.toFixed(2)
+    console.log(fixedChange)
+    this.setState({change:fixedChange})
       
     
   };
