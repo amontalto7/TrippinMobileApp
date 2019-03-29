@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios'; 
-import { View, Text } from "react-native";
+import { View, Text ,StyleSheet} from "react-native";
 import InputWithButton from "../components/TextInput/InputWithButton";
 const BASEURL = "https://api.exchangeratesapi.io/latest?base=USD"
 const TEMP_BASE_CURRENCY = "USD";
@@ -33,11 +33,8 @@ class CurrencyScreen extends Component {
 
   handlePressExchangeCurrency = () => {
     this.CurrencySearch()
-    console.log('press exchange');
-    console.log(this.state.text+ 'hi');
     change = this.state.text * this.state.conversion
     fixedChange = change.toFixed(2)
-    console.log(fixedChange)
     this.setState({change:fixedChange})
       
     
@@ -49,13 +46,13 @@ class CurrencyScreen extends Component {
 
   render() {
     return (
-      <View>
-        <Text>CURRENCY CONVERTER</Text>
-        <InputWithButton
+      <View style={styles.container}>
+        <Text style={styles.title}>Currency Converter</Text>
+        <InputWithButton 
           buttonText={TEMP_BASE_CURRENCY}
           onPress={this.handlePressBaseCurrency}
           defaultValue={BASE}
-          keyboardType="numeric"
+          // keyboardType="numeric"
           onChangeText={this.handleTextChange}
         />
         <InputWithButton
@@ -70,3 +67,19 @@ class CurrencyScreen extends Component {
 }
 
 export default CurrencyScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    marginTop: 50,
+    padding: 20,
+    backgroundColor: "#ffffff"
+  },
+  title:{
+    alignItems: "center",
+    paddingBottom:20,
+    fontSize:30,
+    color:'blue',
+    textAlign:'center'
+  }
+});
