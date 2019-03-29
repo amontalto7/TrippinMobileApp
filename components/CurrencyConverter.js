@@ -3,7 +3,7 @@ import { Text, TextInput, View, TouchableHighlight} from "react-native";
 import axios from 'axios';
 const BASEURL = `https://api.exchangeratesapi.io/latest?base=USD`;
 export default class CurrencyConverter extends React.Component {
-   
+   state 
 
    search=()=> {
       axios.get(BASEURL).then(res => {

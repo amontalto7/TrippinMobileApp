@@ -7,22 +7,22 @@ import {
   TouchableHighlight,
   StyleSheet
 } from "react-native";
-// const InputWithButton = ({ onPress, buttonText, editable } = true);
+
 
 const InputWithButton = props => {
   const { onPress, buttonText, editable = true } = props;
-  //   const containerStyles = [styles.container];
-  //   if (editable === false) {
-  //     containerStyles.push(styles.containerDisabled);
-  //   }
+    const containerStyles = [styles.container];
+    if (editable === false) {
+      containerStyles.push(styles.containerDisabled);
+    }
 
   return (
     <View>
       <TouchableHighlight style={styles.buttonContainer} onPress={onPress}>
-        <Text style={styles.buttonText}>{buttonText}</Text>
+        <Text>{buttonText}</Text>
       </TouchableHighlight>
       <View style={styles.border} />
-      <TextInput style={styles.input} {...props} />
+      <TextInput  {...props}  />
     </View>
   );
 };
@@ -34,6 +34,7 @@ InputWithButton.propTypes = {
 };
 const styles = StyleSheet.create({
   container: {
+    paddingTop:50,
     backgroundColor: "#fff",
     width: "90%",
     height: 48,
@@ -47,30 +48,32 @@ const styles = StyleSheet.create({
     //   paddingTop: 50
   },
   containerDisabled: {
-    backgroundColor: "#999"
+    backgroundColor: "#red"
   },
   buttonContainer: {
     height: 48,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff"
+    backgroundColor: "red"
   },
   buttonText: {
     fontWeight: "600",
     fontSize: 20,
     paddingHorizontal: 16,
-    color: "#AAA"
+    color: "#777"
   },
   input: {
-    height: 48,
     flex: 1,
+    zIndex:99,
     fontSize: 18,
     paddingHorizontal: 8,
-    color: "#AAA"
+    color: "green",
+    width: 90,
+    height:90
   },
   border: {
-    height: 48,
-    backgroundColor: "#123"
+    height: 50,
+    backgroundColor: "#AAA"
   }
 });
 
