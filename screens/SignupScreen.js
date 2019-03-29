@@ -130,21 +130,6 @@ export default class App extends Component {
       <View style={styles.container}>
         <Form ref="form" type={User} options={options} />
         <Button title="Sign Up!" onPress={this.handleSubmit} />
-        {/*Button to go to the next activity*/}
-        {/* <Button
-          title=""
-          // Button Title
-          onPress={() =>
-            this.props.navigation.navigate("Home", {
-              JSON_ListView_Clicked_Item: this.state.email
-            })
-          }
-          //On click of the button we will send
-          //the data as a Json from here to the Second Screen using navigation prop
-        >
-          {" "}
-          Welcome: {this.state.email}
-        </Button> */}
       </View>
     );
   }

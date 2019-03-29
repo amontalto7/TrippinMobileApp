@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     //   paddingTop: 50
   },
   containerDisabled: {
-    backgroundColor: "#red"
+    backgroundColor: "#FF0000"
   },
   buttonContainer: {
     height: 48,

@@ -71,13 +71,6 @@ class LoginScreen extends Component {
       </Button>
     );
   }
-  //   <Button
-  //   title="Go to Signup screen"
-  //   // eslint-disable-next-line react/destructuring-assignment
-  //   // eslint-disable-next-line react/prop-types
-  //   onPress={() => this.props.navigation.navigate("Home")}
-  // > Sign Up Here!
-  // </Button>
 
   render() {
     return (
