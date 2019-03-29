@@ -103,16 +103,16 @@ AlertStack.navigationOptions = {
   )
 };
 
-const SettingsStack = createStackNavigator({
+const CurrencyStack = createStackNavigator({
   Currency: CurrencyScreen
 });
 
-SettingsStack.navigationOptions = {
+CurrencyStack.navigationOptions = {
   tabBarLabel: "Currency",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
+      name={Platform.OS === "ios" ? "ios-cash" : "md-options"}
     />
   )
 };
@@ -124,5 +124,5 @@ export default createBottomTabNavigator({
   ChecklistStack,
   // LinksStack,
   AlertStack,
-  SettingsStack
+ CurrencyStack
 });
