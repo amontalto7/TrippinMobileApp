@@ -11,7 +11,7 @@ import PhrasesScreen from "../screens/PhrasesScreen";
 import LinksScreen from "../screens/LinksScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignupScreen";
-import SettingsScreen from "../screens/SettingsScreen";
+import CurrencyScreen from "../screens/CurrencyScreen"
 import TravelAdvisoryScreen from "../screens/TravelAdvisoryScreen";
 
 const HomeStack = createStackNavigator({
@@ -89,11 +89,11 @@ AlertStack.navigationOptions = {
 };
 
 const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen
+  Currency: CurrencyScreen
 });
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: "Settings",
+  tabBarLabel: "Currency",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
