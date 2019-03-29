@@ -17,8 +17,8 @@ export default class ChecklistScreen extends React.Component {
 
   state = {
     checklist: [],
-    checked: false,
-    isReady: false
+    isReady: false,
+    checked: false
   };
 
   componentWillMount() {
@@ -52,13 +52,20 @@ export default class ChecklistScreen extends React.Component {
   };
 
   handleCheck = id => {
-    const checkboxitem = this.state.checklist.find(
-      checkboxitem => checkboxitem._id === id
-    );
+    let checkListCopy = [...this.state.checklist];
+    checkListCopy = checkListCopy.map(checkboxitem => {
+      if (checkboxitem._id === id) {
+        checkboxitem.checked = !checkboxitem.checked;
+        return checkboxitem;
+      }
+      return checkboxitem;
+    });
+    console.log(checkListCopy);
+    this.setState({ checklist: checkListCopy });
   };
 
   render() {
-    const { isReady, checklist, checked } = this.state;
+    const { isReady, checklist } = this.state;
     if (isReady) {
       // console.log("checklist: ", checklist);
 
@@ -69,9 +76,7 @@ export default class ChecklistScreen extends React.Component {
               key={checklistItem._id}
               title={checklistItem.item}
               checked={checklistItem.checked}
-              onPress={() =>
-                (this.checklistItem.checked = !checklistItem.checked)
-              }
+              onPress={() => this.handleCheck(checklistItem._id)}
             />
           ))}
         </ScrollView>
