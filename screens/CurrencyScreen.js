@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import InputWithButton from "../components/TextInput/InputWithButton";
+
 const TEMP_BASE_CURRENCY = "USD";
 const TEMP_CURRENT_CURRENCY = "EUR";
 const BASE = 100;
@@ -30,6 +31,7 @@ class CurrencyScreen extends Component {
   handleTextChange = text => {
     console.log("change text", text);
   };
+
   render() {
     return (
       <View>
