@@ -68,9 +68,10 @@ class CurrencyScreen extends Component {
           buttonText={TEMP_CURRENT_CURRENCY}
           onPress={this.handlePressExchangeCurrency}
           editable={false}
-          defaultValue={EXCHANGE.toString()}
+          defaultValue={
+            this.state.change === null ? EXCHANGE.toString() : this.state.change
+          }
         />
-        <Text>{this.state.change}</Text>
       </View>
     );
   }
