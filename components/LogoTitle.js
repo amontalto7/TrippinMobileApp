@@ -19,7 +19,7 @@ export default class LogoTitle extends React.Component {
 
 const styles = {
   logoPic: {
-    marginTop: 20,
-    height: Header.HEIGHT
+    marginTop: 20
+    // height: Header.HEIGHT
   }
 };

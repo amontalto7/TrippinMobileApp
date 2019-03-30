@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, FlatList, Dimensions } from "react-native";
 import { ListItem } from "react-native-elements";
 import Loader from "../components/Loader";
+import LanguagePicker from "../components/LanguagePicker";
 
 export default class PhrasesScreen extends React.Component {
   static navigationOptions = {
@@ -45,7 +46,6 @@ export default class PhrasesScreen extends React.Component {
       )
         .then(response => response.json())
         .then(responseData => {
-          console.log(`Translated data ${responseData}`);
           this.setState({ data: responseData, isReady: true }); // when response came change the status.
         })
         .done();
@@ -76,6 +76,8 @@ export default class PhrasesScreen extends React.Component {
     if (isReady) {
       return (
         <View style={styles.container}>
+          <LanguagePicker />
+
           <Loader loading={this.state.loading} />
           <FlatList
             keyExtractor={(item, index) => item.id}
@@ -95,13 +97,9 @@ const styles = StyleSheet.create({
     // display: "flex",
     // alignItems: "flex-start",
     // paddingTop: 15,
-    backgroundColor: "#CCCCCC",
+    backgroundColor: "#DDDDDD",
     height: Dimensions.get("window").height,
     width: "100%"
     // paddingTop: 50
   }
 });
-
-// translate("es", phrases);
-
-// module.exports = translate;
