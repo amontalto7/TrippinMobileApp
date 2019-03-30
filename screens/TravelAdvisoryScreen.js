@@ -12,6 +12,13 @@ import {
 const URL = `https://trippin-api-2019.herokuapp.com/api/travel_advisories`;
 
 export default class TravelAdvisoryScreen extends Component {
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: "#ACDDFE"
+    },
+    title: "Alerts"
+  };
+
   constructor(props) {
     super(props);
     this.state = { isLoading: true, dataSource: null, country: undefined };
@@ -62,7 +69,7 @@ export default class TravelAdvisoryScreen extends Component {
         />
       );
     }
-    let travel_advisories = this.state.dataSource.map(item => {
+    const travel_advisories = this.state.dataSource.map(item => {
       return (
         <View key={item.country} style={styles.item}>
           <Text style={styles.text}>{item.country}</Text>
