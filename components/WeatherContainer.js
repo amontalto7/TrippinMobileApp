@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   weatherImage: {
-    width: 100,
-    height: 100
+    width: 60,
+    height: 60
   }
 });

@@ -42,6 +42,8 @@ export default class HomeScreen extends React.Component {
     )
   });
 
+  // _isMounted = false;
+
   state = {
     lat: null,
     lon: null,
@@ -51,8 +53,13 @@ export default class HomeScreen extends React.Component {
   };
 
   componentDidMount() {
+    // this._isMounted = true;
     this.findCoordinates();
   }
+
+  // componentWillUnmount() {
+  //   this._isMounted = false;
+  // }
 
   findCoordinates = () => {
     // Get latitude / longitude based on your current location
@@ -104,13 +111,14 @@ export default class HomeScreen extends React.Component {
             <Image
               source={
                 __DEV__
-                  ? require("../assets/images/robot-dev.png")
-                  : require("../assets/images/robot-prod.png")
+                  // ? require("../assets/images/robot-dev.png")
+                  // : require("../assets/images/robot-prod.png")
               }
               style={styles.welcomeImage}
             />
             <Location message={this.state.message} />
             <WeatherContainer />
+            <Text>Population: 8.623 million</Text>
           </View>
         </ScrollView>
       </View>
