@@ -123,7 +123,7 @@ export default class HomeScreen extends React.Component {
               // style={styles.welcomeImage}
             />
             <Location message={this.state.message} />
-            {/* <WeatherContainer /> */}
+            <WeatherContainer />
             <Text> </Text>
             <Text>Population: 8.623 million</Text>
             <Text>Currency: USD</Text>
