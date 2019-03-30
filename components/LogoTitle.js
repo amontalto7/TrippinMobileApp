@@ -1,6 +1,7 @@
 import React from "react";
 import { Icon } from "expo";
 import { Image } from "react-native";
+import { Header } from "react-navigation";
 
 import Colors from "../constants/Colors";
 
@@ -10,7 +11,7 @@ export default class LogoTitle extends React.Component {
       <Image
         // eslint-disable-next-line global-require
         source={require("../assets/images/trippin.png")}
-        style={styles.logoPic}
+        // style={styles.logoPic}
       />
     );
   }
@@ -19,7 +20,6 @@ export default class LogoTitle extends React.Component {
 const styles = {
   logoPic: {
     marginTop: 20,
-    height: 110,
-    width: 380
+    height: Header.HEIGHT
   }
 };

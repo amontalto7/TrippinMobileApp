@@ -5,6 +5,9 @@ import Loader from "../components/Loader";
 
 export default class PhrasesScreen extends React.Component {
   static navigationOptions = {
+    headerStyle: {
+      backgroundColor: "#ACDDFE"
+    },
     title: "Phrases"
   };
 
@@ -17,9 +20,13 @@ export default class PhrasesScreen extends React.Component {
     };
   }
 
-  async getCoordinates() {
-    console.log("start loading animation");
+  componentWillMount() {
+    const phrases = this.getPhrases();
   }
+
+  // async getCoordinates() {
+  //   console.log("start loading animation");
+  // }
 
   async getPhrases() {
     this.setState({
@@ -51,10 +58,6 @@ export default class PhrasesScreen extends React.Component {
         loading: false
       });
     }, 3000);
-  }
-
-  componentWillMount() {
-    const phrases = this.getPhrases();
   }
 
   renderItem = ({ item }) => (

@@ -12,7 +12,7 @@ import PhrasesScreen from "../screens/PhrasesScreen";
 import ChecklistScreen from "../screens/ChecklistScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignupScreen";
-import CurrencyScreen from "../screens/CurrencyScreen"
+import CurrencyScreen from "../screens/CurrencyScreen";
 import TravelAdvisoryScreen from "../screens/TravelAdvisoryScreen";
 
 const HomeStack = createStackNavigator({
@@ -112,7 +112,7 @@ CurrencyStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-cash" : "md-options"}
+      name={Platform.OS === "ios" ? "ios-cash" : "md-cash"}
     />
   )
 };
@@ -124,5 +124,5 @@ export default createBottomTabNavigator({
   ChecklistStack,
   // LinksStack,
   AlertStack,
- CurrencyStack
+  CurrencyStack
 });

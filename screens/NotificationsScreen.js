@@ -4,6 +4,9 @@ import Axios from "axios";
 
 export default class PhrasesScreen extends React.Component {
   static navigationOptions = {
+    headerStyle: {
+      backgroundColor: "#ACDDFE"
+    },
     title: "Notifications"
   };
 

@@ -14,31 +14,34 @@ import { Ionicons as Icon } from "@expo/vector-icons";
 import Axios from "axios";
 import { ACCUWEATHER_API_KEY } from "react-native-dotenv";
 import LogoTitle from "../components/LogoTitle";
-import MainDrawer from "../drawers/MainDrawer";
+// import MainDrawer from "../drawers/MainDrawer";
 import Location from "../components/Location";
 
-import { MonoText } from "../components/StyledText";
+// import { MonoText } from "../components/StyledText";
 import WeatherContainer from "../components/WeatherContainer";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
+    headerStyle: {
+      backgroundColor: "#ACDDFE"
+    },
     headerTitle: <LogoTitle />,
     headerLeft: (
-      <TouchableOpacity
-        onPress={() => {
-          this.props.navigation.navigate("DrawerToggle");
-          console.log(navigation);
+      // <TouchableOpacity
+      //   onPress={() => {
+      //     this.props.navigation.navigate("DrawerToggle");
+      //     console.log(navigation);
+      //   }}
+      // >
+      <Icon
+        name="ios-menu"
+        side={30}
+        iconStyle={{
+          padding: 15,
+          paddingTop: Platform.OS === "ios" ? 13 : 7
         }}
-      >
-        <Icon
-          name="ios-menu"
-          side={30}
-          iconStyle={{
-            padding: 15,
-            paddingTop: Platform.OS === "ios" ? 13 : 7
-          }}
-        />
-      </TouchableOpacity>
+      />
+      // </TouchableOpacity>
     )
   });
 
@@ -110,15 +113,21 @@ export default class HomeScreen extends React.Component {
           <View style={styles.welcomeContainer}>
             <Image
               source={
+                // __DEV__
+                // ? require("../assets/images/robot-dev.png")
+                // : require("../assets/images/robot-prod.png")
                 __DEV__
-                  // ? require("../assets/images/robot-dev.png")
-                  // : require("../assets/images/robot-prod.png")
+                  ? require("../assets/images/city.jpg")
+                  : require("../assets/images/city.jpg")
               }
-              style={styles.welcomeImage}
+              // style={styles.welcomeImage}
             />
             <Location message={this.state.message} />
             <WeatherContainer />
+            <Text> </Text>
             <Text>Population: 8.623 million</Text>
+            <Text>Currency: USD</Text>
+            <Text>Official Language: English</Text>
           </View>
         </ScrollView>
       </View>

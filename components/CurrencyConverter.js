@@ -7,7 +7,7 @@ export default class CurrencyConverter extends React.Component {
 
    search=()=> {
       axios.get(BASEURL).then(res => {
-        console.log(res.data.rates);
+        // console.log(res.data.rates);
       });
     }
     

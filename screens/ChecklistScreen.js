@@ -9,7 +9,9 @@ import "@expo/vector-icons";
 
 export default class ChecklistScreen extends React.Component {
   static navigationOptions = {
-    headerTitle: <LogoTitle />,
+    headerStyle: {
+      backgroundColor: "#ACDDFE"
+    },
     title: "Checklist"
   };
 

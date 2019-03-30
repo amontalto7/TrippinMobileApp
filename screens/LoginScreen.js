@@ -12,6 +12,9 @@ import {
 
 class LoginScreen extends Component {
   static navigationOptions = {
+    headerStyle: {
+      backgroundColor: "#ACDDFE"
+    },
     title: "Login"
   };
 
@@ -65,8 +68,7 @@ class LoginScreen extends Component {
     }
 
     return (
-      <Button title="Go to home page" 
-      onPress={this.onButtonPress.bind(this)}>
+      <Button title="Go to home page" onPress={this.onButtonPress.bind(this)}>
         Log in
       </Button>
     );
