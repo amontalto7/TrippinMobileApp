@@ -39,3 +39,15 @@ Cool stuff we used to make this app:
 - Travel Warnings pulled from: https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html/
 - Firebase for Authentication login and Storing new users sign-up information in the Database
 - Exchange Rate API
+- NodeJS
+- Express Server
+- MongoDB/ Mongoose
+- Travis CI
+- Heroku for hosting API
+
+
+This project required the use of 2 repositories as we created one to store all necessary API information, routes, etc..
+
+
+That repo is located here: https://github.com/amontalto7/TrippinAPI
+
