@@ -8,9 +8,18 @@ export default class LogoTitle extends React.Component {
   render() {
     return (
       <Image
-        source={require("../assets/images/logo.png")}
-        style={{ height: 30 }}
+        // eslint-disable-next-line global-require
+        source={require("../assets/images/trippin.png")}
+        style={styles.logoPic}
       />
     );
   }
 }
+
+const styles = {
+  logoPic: {
+    marginTop: 20,
+    height: 110,
+    width: 380
+  }
+};
