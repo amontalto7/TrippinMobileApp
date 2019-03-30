@@ -14,10 +14,10 @@ import { Ionicons as Icon } from "@expo/vector-icons";
 import Axios from "axios";
 import { ACCUWEATHER_API_KEY } from "react-native-dotenv";
 import LogoTitle from "../components/LogoTitle";
-import MainDrawer from "../drawers/MainDrawer";
+// import MainDrawer from "../drawers/MainDrawer";
 import Location from "../components/Location";
 
-import { MonoText } from "../components/StyledText";
+// import { MonoText } from "../components/StyledText";
 import WeatherContainer from "../components/WeatherContainer";
 
 export default class HomeScreen extends React.Component {
