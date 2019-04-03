@@ -62,7 +62,7 @@ Github: https://github.com/cgarcia101015
 Jennifer Rubin: https://www.linkedin.com/in/jennifer-rubin-18218317a/
 Github: https://github.com/jrubin9326
 
-Ulrich Todman: https://www.linkedin.com/in/ulric-todman/
+Ulric Todman: https://www.linkedin.com/in/ulric-todman/
 Github: https://github.com/ricksinclair
 
 Vernaliz Gonzalez: www.linkedin.com/in/vernagonzalez
