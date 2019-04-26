@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from "react";
 import { Text } from "react-native";
 import firebase from "firebase";
@@ -15,7 +14,7 @@ class LoginScreen extends Component {
     headerStyle: {
       backgroundColor: "#ACDDFE"
     },
-    title: "Login"
+    title: "Log in"
   };
 
   state = {
