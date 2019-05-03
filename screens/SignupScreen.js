@@ -59,6 +59,12 @@ const options = {
 };
 
 export default class App extends Component {
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: "#ACDDFE"
+    },
+    title: "Sign up"
+  };
   constructor(props) {
     super(props);
     this.state = {
