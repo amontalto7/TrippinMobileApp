@@ -38,14 +38,14 @@ export default class WeatherContainer extends Component {
         `http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${ACCUWEATHER_API_KEY}`
       )
       .then(data => {
-        console.log(data.data[0].Temperature.Imperial.Value);
+        // console.log(data.data[0].Temperature.Imperial.Value);
         this.setState({
           temp: `${data.data[0].Temperature.Imperial.Value} ${
             data.data[0].Temperature.Imperial.Unit
           }`,
           num: data.data[0].WeatherIcon
         });
-        console.log(this.state.temp);
+        // console.log(this.state.temp);
       })
       .catch(err => console.log(err));
   };
