@@ -46,7 +46,7 @@ export default class ChecklistScreen extends React.Component {
     );
     const { data } = res;
 
-    console.log("data: ", data);
+    // console.log("data: ", data);
 
     this.setState({ checklist: data, isReady: true });
     // console.log("----data----");
