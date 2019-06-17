@@ -20,7 +20,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-elements": "^1.1.0",
     "react-native-extended-stylesheet": "^0.11.2",
-    "react-native-firebase": "^5.4.2",
+    "react-native-firebase": "^5.4.3",
     "react-navigation": "^3.11.0",
     "rss-parser": "^3.7.1",
     "tcomb-form-native": "^0.6.20"
@@ -28,7 +28,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
-    "babel-preset-expo": "^5.0.0",
+    "babel-preset-expo": "^5.2.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.3.0",
