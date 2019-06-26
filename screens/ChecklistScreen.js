@@ -53,16 +53,25 @@ export default class ChecklistScreen extends React.Component {
     // console.log(res.data);
   };
 
+  toggleItem = (id, value) => {
+    Axios.put(`http://trippin-api-2019.herokuapp.com/api/checkitem/${id}`, {
+      checked: value
+    }).then(res => console.log(res.data));
+    // const { data } = res;
+    // console.log(`DATA ${data}`);
+  };
+
   handleCheck = id => {
     let checkListCopy = [...this.state.checklist];
     checkListCopy = checkListCopy.map(checkboxitem => {
       if (checkboxitem._id === id) {
         checkboxitem.checked = !checkboxitem.checked;
+        this.toggleItem(id, checkboxitem.checked);
         return checkboxitem;
       }
       return checkboxitem;
     });
-    console.log(checkListCopy);
+    // console.log(checkListCopy);
     this.setState({ checklist: checkListCopy });
   };
 
