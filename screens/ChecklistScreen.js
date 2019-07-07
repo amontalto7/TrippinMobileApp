@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { FlatList, StyleSheet, Text, View, ScrollView } from "react-native";
+import { FlatList, StyleSheet, View, ScrollView, Alert } from "react-native";
 import { Card, ListItem, Button, Icon, CheckBox } from "react-native-elements";
 import { Constants } from "expo";
 import Axios from "axios";
 import LogoTitle from "../components/LogoTitle";
+import Input from "../components/Input";
 
 import "@expo/vector-icons";
 
@@ -15,17 +16,16 @@ export default class ChecklistScreen extends React.Component {
     title: "Checklist"
   };
 
-  // _isMounted = false;
-
   state = {
     checklist: [],
-    isReady: false,
-    checked: false
+    isReady: false
   };
 
   componentWillMount() {
-    // console.log("hi");
-    // this._isMounted = true;
+    this.getChecklist();
+  }
+
+  componentDidUpdate() {
     this.getChecklist();
   }
 
@@ -46,11 +46,7 @@ export default class ChecklistScreen extends React.Component {
     );
     const { data } = res;
 
-    // console.log("data: ", data);
-
     this.setState({ checklist: data, isReady: true });
-    // console.log("----data----");
-    // console.log(res.data);
   };
 
   toggleItem = (id, value) => {
@@ -59,6 +55,20 @@ export default class ChecklistScreen extends React.Component {
     }).then(res => console.log(res.data));
     // const { data } = res;
     // console.log(`DATA ${data}`);
+  };
+
+  addChecklistItem = text => {
+    Axios.post("http://trippin-api-2019.herokuapp.com/api/addchecklist", {
+      item: text
+    })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+
+    // const { checklist } = this.state;
+
+    // this.setState({
+    //   checklist: [...checklist, text]
+    // });
   };
 
   handleCheck = id => {
@@ -75,22 +85,41 @@ export default class ChecklistScreen extends React.Component {
     this.setState({ checklist: checkListCopy });
   };
 
+  _onLongPress = (id, text) => {
+    console.log(this.state.checklist[0]);
+    Alert.alert("Delete item:", `"${text}"?`, [
+      { text: "Cancel", style: "cancel" },
+      { text: "OK", onPress: () => console.log("OK Pressed") }
+    ]);
+    // TODO: Menu to delete
+  };
+
   render() {
     const { isReady, checklist } = this.state;
     if (isReady) {
       // console.log("checklist: ", checklist);
 
       return (
-        <ScrollView style={styles.container}>
-          {checklist.map(checklistItem => (
-            <CheckBox
-              key={checklistItem._id}
-              title={checklistItem.item}
-              checked={checklistItem.checked}
-              onPress={() => this.handleCheck(checklistItem._id)}
-            />
-          ))}
-        </ScrollView>
+        <View style={styles.container}>
+          <Input
+            placeholder="Add an item, then hit enter!"
+            onSubmitEditing={this.addChecklistItem}
+          />
+
+          <ScrollView>
+            {checklist.map(checklistItem => (
+              <CheckBox
+                key={checklistItem._id}
+                title={checklistItem.item}
+                checked={checklistItem.checked}
+                onPress={() => this.handleCheck(checklistItem._id)}
+                onLongPress={() =>
+                  this._onLongPress(checklistItem._id, checklistItem.item)
+                }
+              />
+            ))}
+          </ScrollView>
+        </View>
       );
     }
     return <View />;
