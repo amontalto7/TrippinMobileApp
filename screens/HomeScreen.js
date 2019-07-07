@@ -26,22 +26,25 @@ export default class HomeScreen extends React.Component {
       backgroundColor: "#ACDDFE"
     },
     headerTitle: <LogoTitle />,
-    headerLeft: (
-      // <TouchableOpacity
-      //   onPress={() => {
-      //     this.props.navigation.navigate("DrawerToggle");
-      //     console.log(navigation);
-      //   }}
-      // >
-      <Icon
-        name="ios-menu"
-        side={30}
-        iconStyle={{
-          padding: 15,
-          paddingTop: Platform.OS === "ios" ? 13 : 7
-        }}
-      />
-      // </TouchableOpacity>
+    // headerLeft: (
+    //   // <TouchableOpacity
+    //   //   onPress={() => {
+    //   //     this.props.navigation.navigate("DrawerToggle");
+    //   //     console.log(navigation);
+    //   //   }}
+    //   // >
+    //   <Icon
+    //     name="ios-menu"
+    //     side={30}
+    //     iconStyle={{
+    //       padding: 15,
+    //       paddingTop: Platform.OS === "ios" ? 13 : 7
+    //     }}
+    //   />
+    //   // </TouchableOpacity>
+    // ),
+    headerRight: (
+      <Button onPress={() => alert("This is a button!")} title="Login" />
     )
   });
 
@@ -75,19 +78,15 @@ export default class HomeScreen extends React.Component {
           lon: position.coords.longitude
         });
 
-        const url = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${ACCUWEATHER_API_KEY}&q=${
-          this.state.lat
-        }%2C${this.state.lon}`;
+        const url = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${ACCUWEATHER_API_KEY}&q=${this.state.lat}%2C${this.state.lon}`;
 
-        console.log(url);
+        // console.log(url);
 
         Axios.get(url)
           .then(response => {
             this.setState({
               city: response.data.AdministrativeArea.EnglishName,
-              message: `Welcome to ${
-                response.data.AdministrativeArea.EnglishName
-              }!`
+              message: `Welcome to ${response.data.AdministrativeArea.EnglishName}!`
             });
             // console.log(response.data.AdministrativeArea.EnglishName);
           })
