@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { FlatList, StyleSheet, View, ScrollView, Alert } from "react-native";
-import { Card, ListItem, Button, Icon, CheckBox } from "react-native-elements";
+import { StyleSheet, View, ScrollView, Alert } from "react-native";
+import { CheckBox } from "react-native-elements";
 import { Constants } from "expo";
 import Axios from "axios";
 import LogoTitle from "../components/LogoTitle";
@@ -29,9 +29,6 @@ export default class ChecklistScreen extends React.Component {
     this.getChecklist();
   }
 
-  // componentWillUnmount() {
-  //   this._isMounted = false;
-  // }
   renderItem = ({ item }) => (
     <CheckBox
       title={item.item}
@@ -63,12 +60,6 @@ export default class ChecklistScreen extends React.Component {
     })
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
-
-    // const { checklist } = this.state;
-
-    // this.setState({
-    //   checklist: [...checklist, text]
-    // });
   };
 
   handleCheck = id => {
@@ -85,13 +76,17 @@ export default class ChecklistScreen extends React.Component {
     this.setState({ checklist: checkListCopy });
   };
 
+  handleDelete = id => {
+    Axios.delete(
+      `http://trippin-api-2019.herokuapp.com/api/delchecklist/${id}`
+    ).then(res => console.log(res.data));
+  };
+
   _onLongPress = (id, text) => {
-    console.log(this.state.checklist[0]);
     Alert.alert("Delete item:", `"${text}"?`, [
       { text: "Cancel", style: "cancel" },
-      { text: "OK", onPress: () => console.log("OK Pressed") }
+      { text: "OK", onPress: () => this.handleDelete(id) }
     ]);
-    // TODO: Menu to delete
   };
 
   render() {
@@ -102,11 +97,12 @@ export default class ChecklistScreen extends React.Component {
       return (
         <View style={styles.container}>
           <Input
-            placeholder="Add an item, then hit enter!"
+            placeholder="Add an item"
             onSubmitEditing={this.addChecklistItem}
+            style={styles.inputBox}
           />
 
-          <ScrollView>
+          <ScrollView contentContainerStyle={styles.contentContainer}>
             {checklist.map(checklistItem => (
               <CheckBox
                 key={checklistItem._id}
@@ -129,9 +125,8 @@ export default class ChecklistScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
     backgroundColor: "#ecf0f1"
-  }
+  },
+  contentContainer: {}
 });

@@ -36,8 +36,11 @@ export default class Input extends Component {
 
 const styles = StyleSheet.create({
   input: {
-    padding: 15,
-    height: 50,
-    marginTop: -10
+    paddingLeft: 15,
+    height: 40,
+    marginTop: -10,
+    fontSize: 18,
+    borderBottomColor: "#bbb",
+    borderBottomWidth: StyleSheet.hairlineWidth
   }
 });
