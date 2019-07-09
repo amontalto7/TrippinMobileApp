@@ -27,6 +27,7 @@ export default class Input extends Component {
         style={styles.input}
         value={text}
         placeholder={placeholder}
+        clearButtonMode="always"
         onChangeText={this.onChangeText}
         onSubmitEditing={this.onSubmitEditing}
       />
