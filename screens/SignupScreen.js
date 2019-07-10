@@ -10,7 +10,7 @@ import firebase from "firebase";
 import { FIREBASE_API_KEY } from "react-native-dotenv";
 import HomeScreen from "./HomeScreen";
 
-const Form = t.form.Form;
+const { Form } = t.form;
 
 const User = t.struct({
   email: t.String,
@@ -65,6 +65,7 @@ export default class App extends Component {
     },
     title: "Sign up"
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -86,7 +87,7 @@ export default class App extends Component {
   // }
 
   writeUserData = ({ email, password, terms }) => {
-    console.log( email);
+    console.log(email);
     firebase
       .database()
       .ref("Users/")
@@ -101,7 +102,7 @@ export default class App extends Component {
         this.readUserData(email);
       })
       .catch(error => {
-        //error callback
+        // error callback
         console.log("error ", error);
       });
   };
@@ -136,7 +137,7 @@ export default class App extends Component {
       <View style={styles.container}>
         <Form ref="form" type={User} options={options} />
         <Button title="Sign Up!" onPress={this.handleSubmit} />
-        {/*Button to go to the next activity*/}
+        {/* Button to go to the next activity */}
         {/* <Button
           title=""
           // Button Title

@@ -16,6 +16,7 @@ import { ACCUWEATHER_API_KEY } from "react-native-dotenv";
 import LogoTitle from "../components/LogoTitle";
 // import MainDrawer from "../drawers/MainDrawer";
 import Location from "../components/Location";
+import SignupScreen from "./SignupScreen";
 
 // import { MonoText } from "../components/StyledText";
 import WeatherContainer from "../components/WeatherContainer";
@@ -44,7 +45,7 @@ export default class HomeScreen extends React.Component {
     //   // </TouchableOpacity>
     // ),
     headerRight: (
-      <Button onPress={() => alert("This is a button!")} title="Login" />
+      <Button onPress={() => navigation.navigate("Login")} title="Login" />
     )
   });
 
@@ -53,9 +54,8 @@ export default class HomeScreen extends React.Component {
   state = {
     lat: null,
     lon: null,
-    // location: null,
     city: null,
-    message: "New York"
+    message: ""
   };
 
   componentDidMount() {

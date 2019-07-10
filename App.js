@@ -1,16 +1,27 @@
 import React from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import {
+  Platform,
+  StatusBar,
+  StyleSheet,
+  View,
+  AsyncStorage
+} from "react-native";
 import { AppLoading, Asset, Font, Icon } from "expo";
 import firebase from "firebase";
 import { FIREBASE_API_KEY } from "react-native-dotenv";
-import DrawerNav from "./navigation/DrawerNav";
+// import DrawerNav from "./navigation/DrawerNav";
 import AppNavigator from "./navigation/AppNavigator";
-import HomeScreen from "./screens/HomeScreen";
-import LoginScreen from "./screens/LoginScreen";
+// import HomeScreen from "./screens/HomeScreen";
+// import LoginScreen from "./screens/LoginScreen";
+
+const STORAGE_KEY = "ASYNC_STORAGE_TRIPPIN";
 
 export default class App extends React.Component {
   state = {
-    isLoadingComplete: false
+    isLoadingComplete: false,
+    lat: null,
+    lon: null,
+    city: null
   };
 
   componentDidMount() {
