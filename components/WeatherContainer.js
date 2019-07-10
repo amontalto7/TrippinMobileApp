@@ -40,9 +40,7 @@ export default class WeatherContainer extends Component {
       .then(data => {
         // console.log(data.data[0].Temperature.Imperial.Value);
         this.setState({
-          temp: `${data.data[0].Temperature.Imperial.Value} ${
-            data.data[0].Temperature.Imperial.Unit
-          }`,
+          temp: `${data.data[0].Temperature.Imperial.Value} ${data.data[0].Temperature.Imperial.Unit}`,
           num: data.data[0].WeatherIcon
         });
         // console.log(this.state.temp);
@@ -57,11 +55,9 @@ export default class WeatherContainer extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.tempText}>Current temperature:</Text>
+        <Text style={styles.temperature}> {this.state.temp}</Text>
         {this.state.num && this.renderWeatherIcon(this.state.num)}
-        <Text>
-          Current temperature:
-          <Text style={styles.temperature}> {this.state.temp}</Text>
-        </Text>
       </View>
     );
   }
@@ -72,8 +68,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+  tempText: {
+    fontSize: 20
+  },
   temperature: {
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: "bold"
   },
   weatherImage: {
