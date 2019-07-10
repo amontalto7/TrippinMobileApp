@@ -20,7 +20,8 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-elements": "^1.1.0",
     "react-native-extended-stylesheet": "^0.11.2",
-    "react-native-firebase": "^5.5.4",
+    "react-native-firebase": "^5.5.5",
+    "react-native-webview": "^5.12.1",
     "react-navigation": "^3.11.0",
     "rss-parser": "^3.7.2",
     "tcomb-form-native": "^0.6.20"

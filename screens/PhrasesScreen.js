@@ -1,8 +1,16 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, FlatList, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Dimensions,
+  Alert
+} from "react-native";
 import { ListItem } from "react-native-elements";
 import Loader from "../components/Loader";
 import LanguagePicker from "../components/LanguagePicker";
+import Input from "../components/Input";
 
 export default class PhrasesScreen extends React.Component {
   static navigationOptions = {
@@ -62,6 +70,10 @@ export default class PhrasesScreen extends React.Component {
 
   renderItem = ({ item }) => (
     <ListItem
+      style={{
+        borderBottomColor: "#bbb",
+        borderBottomWidth: StyleSheet.hairlineWidth
+      }}
       title={item.og_phrase}
       subtitle={item.tr_phrase}
       // leftAvatar={{
@@ -71,6 +83,10 @@ export default class PhrasesScreen extends React.Component {
     />
   );
 
+  quickTranslate = () => {
+    Alert.alert("Coming soon!");
+  };
+
   render() {
     const { isReady } = this.state; // check the state if response is ready render view
     if (isReady) {
@@ -79,6 +95,10 @@ export default class PhrasesScreen extends React.Component {
           <LanguagePicker />
 
           <Loader loading={this.state.loading} />
+          <Input
+            placeholder="Quick translate"
+            onSubmitEditing={this.quickTranslate}
+          />
           <FlatList
             keyExtractor={(item, index) => item.id}
             data={this.state.data}
@@ -97,7 +117,7 @@ const styles = StyleSheet.create({
     // display: "flex",
     // alignItems: "flex-start",
     // paddingTop: 15,
-    backgroundColor: "#DDDDDD",
+    backgroundColor: "#EEEEEE",
     height: Dimensions.get("window").height,
     width: "100%"
     // paddingTop: 50

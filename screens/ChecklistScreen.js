@@ -99,7 +99,6 @@ export default class ChecklistScreen extends React.Component {
           <Input
             placeholder="Add an item"
             onSubmitEditing={this.addChecklistItem}
-            style={styles.inputBox}
           />
 
           <ScrollView contentContainerStyle={styles.contentContainer}>

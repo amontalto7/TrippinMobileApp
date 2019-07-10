@@ -5,19 +5,24 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   WebView,
-  ScrollView
+  Button
 } from "react-native";
+// import { WebView } from "react-native-webview"; // New version of WebView- but doesn't work with Expo
 
 const URL = `https://trippin-api-2019.herokuapp.com/api/travel_advisories`;
 
 export default class TravelAdvisoryScreen extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     headerStyle: {
       backgroundColor: "#ACDDFE"
     },
     title: "Alerts"
-  };
+    // headerRight: (
+    //   <Button onPress={() => navigation.navigate("Alerts")} title="Refresh" />
+    // )
+  });
 
   constructor(props) {
     super(props);
@@ -47,6 +52,13 @@ export default class TravelAdvisoryScreen extends Component {
     return true;
   };
 
+  clearCountry() {
+    this.setState({
+      country: undefined
+    });
+    // this.props.navigation.goBack("TravelAdvisoryScreen");
+  }
+
   showCountry(country) {
     this.setState({
       country
@@ -63,10 +75,13 @@ export default class TravelAdvisoryScreen extends Component {
     }
     if (this.state.country) {
       return (
-        <WebView
-          source={{ html: this.state.country.content }}
-          onPress={() => this.props.navigation.goBack("TravelAdvisoryScreen")}
-        />
+        <View style={{ flex: 1 }}>
+          <WebView
+            style={{ flex: 1 }}
+            source={{ html: this.state.country.content }}
+          />
+          <Button title="Back" onPress={() => this.clearCountry()} />
+        </View>
       );
     }
     const travel_advisories = this.state.dataSource.map(item => {
