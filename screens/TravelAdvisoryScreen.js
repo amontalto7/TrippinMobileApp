@@ -3,7 +3,6 @@ import {
   BackHandler,
   ActivityIndicator,
   StyleSheet,
-  Text,
   FlatList,
   View,
   WebView,
@@ -14,6 +13,16 @@ import { ListItem, SearchBar } from "react-native-elements";
 // import { WebView } from "react-native-webview"; // New version of WebView- but doesn't work with Expo
 
 const URL = `https://trippin-api-2019.herokuapp.com/api/travel_advisories`;
+let origData = fetch(URL)
+  .then(response => response.json())
+  .then(responseJson => {
+    // console.log(responseJson);
+    this.setState({
+      isLoading: false,
+      dataSource: responseJson.countriesList
+    });
+  })
+  .catch(err => console.log(err));
 
 export default class TravelAdvisoryScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -31,7 +40,8 @@ export default class TravelAdvisoryScreen extends Component {
     this.state = {
       isLoading: true,
       dataSource: null,
-      country: undefined
+      country: undefined,
+      searchterm: undefined
     };
   }
 
@@ -56,7 +66,8 @@ export default class TravelAdvisoryScreen extends Component {
 
   searchFilterFunction = text => {
     this.setState({
-      value: text
+      value: text,
+      dataSource: origData
     });
 
     const filteredResults = this.state.dataSource.filter(item => {
@@ -79,7 +90,6 @@ export default class TravelAdvisoryScreen extends Component {
         lightTheme
         round
         onChangeText={text => {
-          this.setState({ text });
           this.searchFilterFunction(text);
         }}
         autoCorrect={false}
@@ -107,6 +117,7 @@ export default class TravelAdvisoryScreen extends Component {
 
   render() {
     const { isLoading, country, dataSource } = this.state;
+    origData = dataSource;
     if (isLoading) {
       return (
         <View style={styles.container}>
