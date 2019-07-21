@@ -4,11 +4,13 @@ import {
   ActivityIndicator,
   StyleSheet,
   Text,
+  FlatList,
   View,
-  ScrollView,
   WebView,
   Button
 } from "react-native";
+
+import { ListItem, SearchBar } from "react-native-elements";
 // import { WebView } from "react-native-webview"; // New version of WebView- but doesn't work with Expo
 
 const URL = `https://trippin-api-2019.herokuapp.com/api/travel_advisories`;
@@ -26,7 +28,11 @@ export default class TravelAdvisoryScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { isLoading: true, dataSource: null, country: undefined };
+    this.state = {
+      isLoading: true,
+      dataSource: null,
+      country: undefined
+    };
   }
 
   componentDidMount() {
@@ -48,6 +54,40 @@ export default class TravelAdvisoryScreen extends Component {
     BackHandler.removeEventListener("hardwareBackPress", this.handleBackPress);
   }
 
+  searchFilterFunction = text => {
+    this.setState({
+      value: text
+    });
+
+    const filteredResults = this.state.dataSource.filter(item => {
+      const itemData = `${item.country.toUpperCase()}`;
+      const textData = text.toUpperCase();
+
+      return itemData.indexOf(textData) > -1;
+    });
+
+    this.setState({
+      dataSource: filteredResults
+    });
+  };
+
+  renderHeader = () => {
+    const { value } = this.state;
+    return (
+      <SearchBar
+        placeholder="Type Here..."
+        lightTheme
+        round
+        onChangeText={text => {
+          this.setState({ text });
+          this.searchFilterFunction(text);
+        }}
+        autoCorrect={false}
+        value={value}
+      />
+    );
+  };
+
   handleBackPress = () => {
     return true;
   };
@@ -66,36 +106,48 @@ export default class TravelAdvisoryScreen extends Component {
   }
 
   render() {
-    if (this.state.isLoading) {
+    const { isLoading, country, dataSource } = this.state;
+    if (isLoading) {
       return (
         <View style={styles.container}>
           <ActivityIndicator />
         </View>
       );
     }
-    if (this.state.country) {
+    if (country) {
       return (
         <View style={{ flex: 1 }}>
-          <WebView
-            style={{ flex: 1 }}
-            source={{ html: this.state.country.content }}
-          />
+          <WebView style={{ flex: 1 }} source={{ html: country.content }} />
           <Button title="Back" onPress={() => this.clearCountry()} />
         </View>
       );
     }
-    const travel_advisories = this.state.dataSource.map(item => {
-      return (
-        <View key={item.country} style={styles.item}>
-          <Text style={styles.text}>{item.country}</Text>
-          <Text onPress={() => this.showCountry(item)} />
-          <Text>Threat Level: {item.level}</Text>
-        </View>
-      );
-    });
+    // const travelAdvisories = dataSource.map(item => {
+    //   return (
+    //     <ListItem key={} style={styles.item}>
+    //       <Text style={styles.text}>{item.country}</Text>
+    //       <Text onPress={() => this.showCountry(item)} />
+    //       <Text></Text>
+    //     </ListItem>
+    //   );
+    // });
 
     return (
-      <ScrollView style={styles.container}>{travel_advisories}</ScrollView>
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={dataSource}
+          renderItem={({ item }) => (
+            <ListItem
+              title={`${item.country}`}
+              subtitle={` Threat Level: ${item.level} `}
+              onPress={() => this.showCountry(item)}
+            />
+          )}
+          keyExtractor={item => item.country}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListHeaderComponent={this.renderHeader}
+        />
+      </View>
     );
   }
 }
