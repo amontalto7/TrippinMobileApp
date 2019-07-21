@@ -9,7 +9,7 @@ import {
   Button
 } from "react-native";
 
-import { ListItem, SearchBar } from "react-native-elements";
+import { ListItem, List, SearchBar } from "react-native-elements";
 // import { WebView } from "react-native-webview"; // New version of WebView- but doesn't work with Expo
 
 const URL = `https://trippin-api-2019.herokuapp.com/api/travel_advisories`;
@@ -80,6 +80,19 @@ export default class TravelAdvisoryScreen extends Component {
     this.setState({
       dataSource: filteredResults
     });
+  };
+
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "86%",
+          backgroudColor: "#CED0CE",
+          marginLeft: "14%"
+        }}
+      />
+    );
   };
 
   renderHeader = () => {
