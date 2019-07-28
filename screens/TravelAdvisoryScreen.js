@@ -6,25 +6,17 @@ import {
   FlatList,
   View,
   WebView,
-  Button
+  Button,
+  Text
 } from "react-native";
 
-import { ListItem, List, SearchBar } from "react-native-elements";
+import { ListItem, SearchBar } from "react-native-elements";
 // import { WebView } from "react-native-webview"; // New version of WebView- but doesn't work with Expo
 
 const URL = `https://trippin-api-2019.herokuapp.com/api/travel_advisories`;
-let origData = fetch(URL)
-  .then(response => response.json())
-  .then(responseJson => {
-    // console.log(responseJson);
-    this.setState({
-      isLoading: false,
-      dataSource: responseJson.countriesList
-    });
-  })
-  .catch(err => console.log(err));
 
 export default class TravelAdvisoryScreen extends Component {
+  // eslint-disable-next-line no-unused-vars
   static navigationOptions = ({ navigation }) => ({
     headerStyle: {
       backgroundColor: "#ACDDFE"
@@ -41,20 +33,23 @@ export default class TravelAdvisoryScreen extends Component {
       isLoading: true,
       dataSource: null,
       country: undefined,
-      searchterm: undefined
+      origData: null,
+      noData: null
     };
   }
 
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.handleBackPress);
 
+    // eslint-disable-next-line no-undef
     return fetch(URL)
       .then(response => response.json())
       .then(responseJson => {
         // console.log(responseJson);
         this.setState({
           isLoading: false,
-          dataSource: responseJson.countriesList
+          dataSource: responseJson.countriesList,
+          origData: [...responseJson.countriesList]
         });
       })
       .catch(err => console.log(err));
@@ -63,24 +58,6 @@ export default class TravelAdvisoryScreen extends Component {
   componentWillUnmount() {
     BackHandler.removeEventListener("hardwareBackPress", this.handleBackPress);
   }
-
-  searchFilterFunction = text => {
-    this.setState({
-      value: text,
-      dataSource: origData
-    });
-
-    const filteredResults = this.state.dataSource.filter(item => {
-      const itemData = `${item.country.toUpperCase()}`;
-      const textData = text.toUpperCase();
-
-      return itemData.indexOf(textData) > -1;
-    });
-
-    this.setState({
-      dataSource: filteredResults
-    });
-  };
 
   renderSeparator = () => {
     return (
@@ -128,9 +105,38 @@ export default class TravelAdvisoryScreen extends Component {
     });
   }
 
+  searchFilterFunction(text) {
+    const { dataSource, origData } = this.state;
+
+    this.setState({
+      value: null,
+      dataSource: [...origData]
+    });
+
+    let filteredResults = dataSource.filter(item => {
+      const itemData = `${item.country.toUpperCase()}`;
+      const textData = text.toUpperCase();
+      return itemData.includes(textData);
+    });
+
+    if (!text || text === "") {
+      this.setState({
+        dataSource: origData
+      });
+    } else if (!Array.isArray(filteredResults) && !filteredResults.length) {
+      filteredResults = origData;
+      this.setState({
+        dataSource: origData
+      });
+    } else if (Array.isArray(filteredResults)) {
+      this.setState({
+        dataSource: filteredResults
+      });
+    }
+  }
+
   render() {
-    const { isLoading, country, dataSource } = this.state;
-    origData = dataSource;
+    const { isLoading, country, dataSource, noData } = this.state;
     if (isLoading) {
       return (
         <View style={styles.container}>
@@ -155,22 +161,25 @@ export default class TravelAdvisoryScreen extends Component {
     //     </ListItem>
     //   );
     // });
-
     return (
       <View style={{ flex: 1 }}>
-        <FlatList
-          data={dataSource}
-          renderItem={({ item }) => (
-            <ListItem
-              title={`${item.country}`}
-              subtitle={` Threat Level: ${item.level} `}
-              onPress={() => this.showCountry(item)}
-            />
-          )}
-          keyExtractor={item => item.country}
-          ItemSeparatorComponent={this.renderSeparator}
-          ListHeaderComponent={this.renderHeader}
-        />
+        {noData ? (
+          <Text>NoData</Text>
+        ) : (
+          <FlatList
+            data={[...dataSource]}
+            renderItem={({ item }) => (
+              <ListItem
+                title={`${item.country}`}
+                subtitle={` Threat Level: ${item.level} `}
+                onPress={() => this.showCountry(item)}
+              />
+            )}
+            keyExtractor={item => item.country}
+            ItemSeparatorComponent={this.renderSeparator}
+            ListHeaderComponent={this.renderHeader}
+          />
+        )}
       </View>
     );
   }
