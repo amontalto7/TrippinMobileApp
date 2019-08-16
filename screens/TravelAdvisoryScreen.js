@@ -34,7 +34,8 @@ export default class TravelAdvisoryScreen extends Component {
       dataSource: null,
       country: undefined,
       origData: null,
-      noData: null
+      noData: null,
+      stateText: null
     };
   }
 
@@ -89,6 +90,8 @@ export default class TravelAdvisoryScreen extends Component {
   };
 
   handleBackPress = () => {
+    const { stateText } = this.state;
+    this.searchFilterFunction(stateText);
     return true;
   };
 
@@ -108,25 +111,32 @@ export default class TravelAdvisoryScreen extends Component {
   searchFilterFunction(text) {
     const { dataSource, origData } = this.state;
 
+    let textVar = text;
     this.setState({
       value: null,
-      dataSource: [...origData]
+      dataSource: [...origData],
+      stateText: textVar
     });
 
     let filteredResults = dataSource.filter(item => {
       const itemData = `${item.country.toUpperCase()}`;
-      const textData = text.toUpperCase();
+      const textData = textVar.toUpperCase();
       return itemData.includes(textData);
     });
 
-    if (!text || text === "") {
+    if (!text || text === "" || dataSource.length === 0) {
       this.setState({
         dataSource: origData
       });
-    } else if (!Array.isArray(filteredResults) && !filteredResults.length) {
+    } else if (
+      !Array.isArray(filteredResults) &&
+      filteredResults.length === 0
+    ) {
       filteredResults = origData;
+      textVar = "";
       this.setState({
-        dataSource: origData
+        dataSource: origData,
+        stateText: textVar
       });
     } else if (Array.isArray(filteredResults)) {
       this.setState({
